@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>目的:</strong>
+  <%= @payment_classification.purpose %>
+</p>
+
+<p>
+  <strong>名称:</strong>
+  <%= @payment_classification.name %>
+</p>
+
+<%= link_to '編集', edit_payment_classification_path(@payment_classification) %> |
+<%= link_to '一覧', payment_classifications_path %>

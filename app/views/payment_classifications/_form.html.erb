@@ -1,0 +1,27 @@
+<%= form_with(model: payment_classification, local: true) do |form| %>
+  <% if payment_classification.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(payment_classification.errors.count, "error") %> prohibited this payment_classification from being saved:</h2>
+
+      <ul>
+        <% payment_classification.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :purpose, "目的" %>
+    <%= form.select :purpose, [["生活に必要", :required], ["楽しみのため", :enjoyment]] %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name, "名称" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "保存" %>
+  </div>
+<% end %>
