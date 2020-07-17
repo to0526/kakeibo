@@ -1,15 +1,13 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Payments</h1>
+<h1>支払金額一覧</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Payed on</th>
-      <th>Amount</th>
-      <th>User</th>
-      <th>Payment classification</th>
-      <th>Payment method</th>
+      <th>支払い日</th>
+      <th>支払い金額</th>
+      <th>ユーザー</th>
+      <th>支払い分類</th>
+      <th>支払い方法</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -19,12 +17,12 @@
       <tr>
         <td><%= payment.payed_on %></td>
         <td><%= payment.amount %></td>
-        <td><%= payment.user_id %></td>
-        <td><%= payment.payment_classification_id %></td>
-        <td><%= payment.payment_method_id %></td>
-        <td><%= link_to 'Show', payment %></td>
-        <td><%= link_to 'Edit', edit_payment_path(payment) %></td>
-        <td><%= link_to 'Destroy', payment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= payment.user.email %></td>
+        <td><%= payment.payment_classification.name %></td>
+        <td><%= payment.payment_method.name %></td>
+        <td><%= link_to '詳細', payment %></td>
+        <td><%= link_to '編集', edit_payment_path(payment) %></td>
+        <td><%= link_to '削除', payment, method: :delete, data: { confirm: '削除してよろしいですか？' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Payment', new_payment_path %>
+<%= link_to '新規登録', new_payment_path %>

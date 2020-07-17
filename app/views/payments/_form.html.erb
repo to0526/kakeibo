@@ -12,31 +12,32 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :payed_on %>
+    <%= form.label :payed_on, "支払い日" %>
     <%= form.date_select :payed_on %>
   </div>
 
   <div class="field">
-    <%= form.label :amount %>
+    <%= form.label :amount, "支払い金額" %>
     <%= form.number_field :amount %>
   </div>
 
   <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+    <%= form.label :user_id, "ユーザー" %>
+    <%= current_user.email %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
   </div>
 
   <div class="field">
-    <%= form.label :payment_classification_id %>
-    <%= form.text_field :payment_classification_id %>
+    <%= form.label :payment_classification_id, "支払い分類" %>
+    <%= form.select :payment_classification_id, PaymentClassification.all.collect { |c| [ c.name, c.id ] } %>
   </div>
 
   <div class="field">
-    <%= form.label :payment_method_id %>
-    <%= form.text_field :payment_method_id %>
+    <%= form.label :payment_method_id, "支払い方法" %>
+    <%= form.select :payment_method_id, PaymentMethod.all.collect { |m| [ m.name, m.id ] } %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "保存" %>
   </div>
 <% end %>

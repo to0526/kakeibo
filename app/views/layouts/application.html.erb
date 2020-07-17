@@ -13,6 +13,7 @@
     <div id="nav">
       <% if current_user %>
         <%= link_to "ユーザー", users_path %>
+        <%= link_to "支払金額", payments_path %>
         <%= link_to "支払い分類", payment_classifications_path %>
         <%= link_to "支払い方法", payment_methods_path %>
         <%= link_to "プロフィール編集", edit_user_path(current_user.id) %>
