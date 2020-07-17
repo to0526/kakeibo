@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :payments
   root to: "users#index"
   resources :payment_classifications
   resources :payment_methods
