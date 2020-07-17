@@ -2,7 +2,8 @@ class PaymentsController < ApplicationController
   before_action :set_payment, only: [:show, :edit, :update, :destroy]
 
   def index
-    @payments = Payment.all
+    @q = Payment.ransack(params[:q])
+    @payments = @q.result(distinct: true)
   end
 
   def show
