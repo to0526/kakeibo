@@ -1,5 +1,7 @@
 <h1>支払金額一覧</h1>
 
+合計金額：<%= @payments.sum(:amount) %>
+
 <table>
   <thead>
     <tr>
