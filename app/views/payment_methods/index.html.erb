@@ -14,7 +14,7 @@
         <td><%= payment_method.name %></td>
         <td><%= link_to '詳細', payment_method %></td>
         <td><%= link_to '編集', edit_payment_method_path(payment_method) %></td>
-        <td><%= link_to '削除', payment_method, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '削除', payment_method, method: :delete, data: { confirm: '削除してよろしいですか？' } %></td>
       </tr>
     <% end %>
   </tbody>
