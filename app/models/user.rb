@@ -7,5 +7,5 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: true
 
-  has_many :payments
+  has_many :payments, dependent: :restrict_with_error
 end

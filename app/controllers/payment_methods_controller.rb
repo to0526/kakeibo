@@ -34,8 +34,11 @@ class PaymentMethodsController < ApplicationController
   end
 
   def destroy
-    @payment_method.destroy
-    redirect_to payment_methods_url, notice: '支払い方法を削除しました'
+    if @payment_method.destroy
+      redirect_to payment_methods_url, notice: '支払い方法を削除しました'
+    else
+      redirect_to payment_methods_url, alert: '支払い方法を削除できませんでした'
+    end
   end
 
   private
