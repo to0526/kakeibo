@@ -14,7 +14,7 @@
   <tbody>
     <% @payment_classifications.each do |payment_classification| %>
       <tr>
-        <td><%= payment_classification.purpose %></td>
+        <td><%= payment_classification.purpose_i18n %></td>
         <td><%= payment_classification.name %></td>
         <td><%= link_to '詳細', payment_classification %></td>
         <td><%= link_to '編集', edit_payment_classification_path(payment_classification) %></td>
