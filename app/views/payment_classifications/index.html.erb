@@ -16,7 +16,7 @@
         <td><%= payment_classification.name %></td>
         <td><%= link_to '詳細', payment_classification %></td>
         <td><%= link_to '編集', edit_payment_classification_path(payment_classification) %></td>
-        <td><%= link_to '削除', payment_classification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '削除', payment_classification, method: :delete, data: { confirm: '削除してよろしいですか？' } %></td>
       </tr>
     <% end %>
   </tbody>
