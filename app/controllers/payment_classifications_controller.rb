@@ -34,8 +34,11 @@ class PaymentClassificationsController < ApplicationController
   end
 
   def destroy
-    @payment_classification.destroy
-    redirect_to payment_classifications_url, notice: '支払い分類を削除しました'
+    if @payment_classification.destroy
+      redirect_to payment_classifications_url, notice: '支払い分類を削除しました'
+    else
+      redirect_to payment_classifications_url, alert: '支払い分類を削除できませんでした'
+    end
   end
 
   private

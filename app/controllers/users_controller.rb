@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: [:index, :new, :create]
+  skip_before_action :require_login, only: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    redirect_to login_url unless current_user
     @users = User.all
   end
 
@@ -36,8 +35,11 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    redirect_to users_url, notice: 'ユーザーを削除しました'
+    if @user.destroy
+      redirect_to users_url, notice: 'ユーザーを削除しました'
+    else
+      redirect_to users_url, alert: 'ユーザーを削除できませんでした'
+    end
   end
 
   private

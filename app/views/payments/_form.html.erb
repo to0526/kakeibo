@@ -1,0 +1,43 @@
+<%= form_with(model: payment, local: true) do |form| %>
+  <% if payment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
+
+      <ul>
+        <% payment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :payed_on, "支払い日" %>
+    <%= form.date_select :payed_on %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount, "支払い金額" %>
+    <%= form.number_field :amount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id, "ユーザー" %>
+    <%= current_user.email %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :payment_classification_id, "支払い分類" %>
+    <%= form.select :payment_classification_id, PaymentClassification.all.collect { |c| [ c.name, c.id ] } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :payment_method_id, "支払い方法" %>
+    <%= form.select :payment_method_id, PaymentMethod.all.collect { |m| [ m.name, m.id ] } %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "保存" %>
+  </div>
+<% end %>
