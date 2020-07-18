@@ -14,6 +14,6 @@ class UserSessionsController < ApplicationController
 
   def destroy
     logout
-    redirect_to(:users, notice: 'ログアウトしました')
+    redirect_to(login_url, notice: 'ログアウトしました')
   end
 end
