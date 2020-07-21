@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_21_103421) do
+ActiveRecord::Schema.define(version: 2020_07_21_121316) do
 
   create_table "payment_classifications", force: :cascade do |t|
     t.integer "purpose", null: false
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2020_07_21_103421) do
     t.integer "payment_method_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "note"
     t.index ["payment_classification_id"], name: "index_payments_on_payment_classification_id"
     t.index ["payment_method_id"], name: "index_payments_on_payment_method_id"
     t.index ["user_id"], name: "index_payments_on_user_id"
