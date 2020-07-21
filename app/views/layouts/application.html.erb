@@ -18,9 +18,6 @@
         <%= link_to "支払い方法", payment_methods_path %>
         <%= link_to "プロフィール編集", edit_user_path(current_user.id) %>
         <%= link_to "ログアウト", :logout, method: :post %>
-      <% else %>
-        <%= link_to "ユーザー登録", new_user_path %> |
-        <%= link_to "ログイン", :login %>
       <% end %>
     </div>
     <div>
