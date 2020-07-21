@@ -20,7 +20,7 @@
   <%= f.submit "検索" %>
 <% end %>
 
-合計金額：<%= @payments.sum(:amount) %>
+合計金額：<%= @payments.sum(:amount).to_s(:delimited) %>
 
 <table>
   <thead>
@@ -39,8 +39,8 @@
     <% @payments.each do |payment| %>
       <tr>
         <td><%= payment.payed_on %></td>
-        <td><%= payment.amount %></td>
-        <td><%= payment.user.email %></td>
+        <td align="right"><%= payment.amount.to_s(:delimited) %></td>
+        <td><%= payment.user.name %></td>
         <td><%= payment.payment_classification.name %></td>
         <td><%= payment.payment_method.name %></td>
         <td><%= payment.note %></td>
