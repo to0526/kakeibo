@@ -3,7 +3,7 @@ class PaymentsController < ApplicationController
 
   def index
     @q = Payment.ransack(params[:q])
-    @payments = @q.result(distinct: true)
+    @payments = @q.result(distinct: true).order(payed_on: :desc)
   end
 
   def show
