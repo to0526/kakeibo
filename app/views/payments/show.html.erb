@@ -23,5 +23,10 @@
   <%= @payment.payment_method.name %>
 </p>
 
+<p>
+  <strong>備考:</strong>
+  <%= @payment.note %>
+</p>
+
 <%= link_to '編集', edit_payment_path(@payment) %> |
 <%= link_to '一覧', payments_path %>

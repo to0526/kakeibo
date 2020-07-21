@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= form.label :user_id, "ユーザー" %>
-    <%= current_user.email %>
+    <%= current_user.name %>
     <%= form.hidden_field :user_id, value: current_user.id %>
   </div>
 
@@ -35,6 +35,11 @@
   <div class="field">
     <%= form.label :payment_method_id, "支払い方法" %>
     <%= form.select :payment_method_id, PaymentMethod.all.collect { |m| [ m.name, m.id ] } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :note, "備考" %>
+    <%= form.text_area :note %>
   </div>
 
   <div class="actions">
