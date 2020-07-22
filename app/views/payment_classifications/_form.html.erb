@@ -21,6 +21,11 @@
     <%= form.text_field :name %>
   </div>
 
+  <div class="field">
+    <%= form.label :sort, "並び順" %>
+    <%= form.number_field :sort %>
+  </div>
+
   <div class="actions">
     <%= form.submit "保存" %>
   </div>

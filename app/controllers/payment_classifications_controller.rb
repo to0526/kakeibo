@@ -2,7 +2,7 @@ class PaymentClassificationsController < ApplicationController
   before_action :set_payment_classification, only: [:show, :edit, :update, :destroy]
 
   def index
-    @payment_classifications = PaymentClassification.all
+    @payment_classifications = PaymentClassification.all.order(:sort)
   end
 
   def show
@@ -47,6 +47,6 @@ class PaymentClassificationsController < ApplicationController
     end
 
     def payment_classification_params
-      params.require(:payment_classification).permit(:purpose, :name)
+      params.require(:payment_classification).permit(:purpose, :name, :sort)
     end
 end

@@ -5,6 +5,7 @@
     <tr>
       <th>目的</th>
       <th>名称</th>
+      <th>並び順</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +15,7 @@
       <tr>
         <td><%= payment_classification.purpose_i18n %></td>
         <td><%= payment_classification.name %></td>
+        <td><%= payment_classification.sort %></td>
         <td><%= link_to '詳細', payment_classification %></td>
         <td><%= link_to '編集', edit_payment_classification_path(payment_classification) %></td>
         <td><%= link_to '削除', payment_classification, method: :delete, data: { confirm: '削除してよろしいですか？' } %></td>

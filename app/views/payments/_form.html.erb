@@ -29,7 +29,7 @@
 
   <div class="field">
     <%= form.label :payment_classification_id, "支払い分類" %>
-    <%= form.select :payment_classification_id, PaymentClassification.all.collect { |c| [ c.name, c.id ] } %>
+    <%= form.select :payment_classification_id, PaymentClassification.all.order(:sort).collect { |c| [ c.name, c.id ] } %>
   </div>
 
   <div class="field">
