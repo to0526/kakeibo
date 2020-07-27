@@ -2,6 +2,11 @@ class PaymentsController < ApplicationController
   before_action :set_payment, only: [:show, :edit, :update, :destroy]
 
   def index
+    unless params[:q]
+      params[:q] = {}
+      params[:q][:payed_on_gteq] = Date.today.beginning_of_month.to_s
+      params[:q][:payed_on_lteq] = Date.today.end_of_month.to_s
+    end
     @q = Payment.ransack(params[:q])
     @payments = @q.result(distinct: true).order(payed_on: :desc)
     @payments_total_amount = @payments.map{|payment|payment.amount}.sum.to_s(:delimited)
