@@ -20,7 +20,7 @@
   <%= f.submit "検索" %>
 <% end %>
 
-合計金額：<%= @payments.sum(:amount).to_s(:delimited) %>
+合計金額：<%= @payments_total_amount %>
 
 <table>
   <thead>

@@ -4,6 +4,7 @@ class PaymentsController < ApplicationController
   def index
     @q = Payment.ransack(params[:q])
     @payments = @q.result(distinct: true).order(payed_on: :desc)
+    @payments_total_amount = @payments.map{|payment|payment.amount}.sum.to_s(:delimited)
   end
 
   def show
