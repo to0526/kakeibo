@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    depends_on:
+      - db
+    networks:
+      - backend
+    ports:
+      - 3000:3000
+    command: ["bin/rails", "server", "-b", "0.0.0.0"]
+
+  db:
+    image: postgres:11.6-alpine
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: kakeibo
+      POSTGRES_DB: kakeibo_development
+    ports:
+      - 5432:5432
+    networks:
+      - backend
+
+volumes:
+  postgres_volume:
+    driver: local
+
+networks:
+  backend:
+    driver: bridge
