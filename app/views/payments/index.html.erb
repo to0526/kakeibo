@@ -33,6 +33,14 @@
 
 
 合計金額：<%= @payments_total_amount %>
+<table>
+  <% @payments_amount_with_classification.each do |payments_amount_with_classification| %>
+    <tr>
+      <th><%= payments_amount_with_classification[:payment_classification] %></th>
+      <td><%= payments_amount_with_classification[:amount] %></td>
+    </tr>
+  <% end %>
+</table>
 
 <table>
   <thead>
