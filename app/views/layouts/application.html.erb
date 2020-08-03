@@ -12,7 +12,7 @@
 
   <body>
     <header>
-      <h1><%= image_tag("title.png") %></h1>
+      <h1><%= link_to image_tag("title.png"), new_payment_path %></h1>
       <nav>
         <% if current_user %>
           <ul class="clearfix">
