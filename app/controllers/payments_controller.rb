@@ -10,6 +10,13 @@ class PaymentsController < ApplicationController
     @q = Payment.ransack(params[:q])
     @payments = @q.result(distinct: true).order(payed_on: :desc)
     @payments_total_amount = @payments.map{|payment|payment.amount}.sum.to_s(:delimited)
+    @payments_amount_with_classification =
+      PaymentClassification.all.order(:sort).each_with_object([]) do |payment_classification, arr|
+        arr << {
+          payment_classification: payment_classification.name,
+          amount: @payments.where(payment_classification_id: payment_classification.id).map{|payment|payment.amount}.sum.to_s(:delimited)
+        }
+      end
   end
 
   def show

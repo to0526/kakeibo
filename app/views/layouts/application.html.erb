@@ -11,22 +11,27 @@
   </head>
 
   <body>
-    <%= image_tag("title.png") %>
-    <div id="nav">
-      <% if current_user %>
-        <%= link_to "ユーザー", users_path %>
-        <%= link_to "支払金額一覧", payments_path %>
-        <%= link_to "支払金額新規登録", new_payment_path %>
-        <%= link_to "支払い分類", payment_classifications_path %>
-        <%= link_to "支払い方法", payment_methods_path %>
-        <%= link_to "プロフィール編集", edit_user_path(current_user.id) %>
-        <%= link_to "ログアウト", :logout, method: :post %>
-      <% end %>
-    </div>
-    <div>
-      <p id="notice"><%= flash[:notice] %></p>
-      <p id="alert"><%= flash[:alert] %></p>
-    </div>
-    <%= yield %>
+    <header>
+      <h1><%= link_to image_tag("title.png"), new_payment_path %></h1>
+      <nav>
+        <% if current_user %>
+          <ul class="clearfix">
+            <li><%= link_to "支払金額一覧", payments_path %></li>
+            <li><%= link_to "支払金額追加", new_payment_path %></li>
+            <li><%= link_to "支払分類", payment_classifications_path %></li>
+            <li><%= link_to "支払方法", payment_methods_path %></li>
+            <li><%= link_to "ユーザー", users_path %></li>
+            <li><%= link_to "ログアウト", :logout, method: :post %></li>
+          </ul>
+        <% end %>
+      </nav>
+    </header>
+    <main>
+      <div>
+        <p id="notice"><%= flash[:notice] %></p>
+        <p id="alert"><%= flash[:alert] %></p>
+      </div>
+      <%= yield %>
+    </main>
   </body>
 </html>
