@@ -14,7 +14,7 @@ main form .field label {
 }
 
 main form .field label {
-  width: 90px;
+  width: 70px;
   display: inline-block;
 }
 
@@ -42,7 +42,7 @@ main form .field .field_with_errors textarea {
 }
 
 main form .actions input[type="submit"] {
-  margin-left: 95px;
+  margin-left: 75px;
   background-color: navy;
   padding: 10px 20px;
   border: 1px solid navy;
