@@ -57,3 +57,10 @@ main form #error_explanation {
   border-radius: 10px;
   margin-bottom: 20px;
 }
+
+main #search_field {
+  border: 1px solid olive;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}

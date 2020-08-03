@@ -1,32 +1,36 @@
 <h2>支払金額一覧</h2>
 
-<%= search_form_for @q do |f| %>
-  <div class="field">
-    <%= f.label :payed_on_gteq, "支払日" %>
-    <%= f.date_field :payed_on_gteq %>
-    〜
-    <%= f.date_field :payed_on_lteq %>
-  </div>
+<div id="search_field">
+  <h3>検索</h3>
+  <%= search_form_for @q do |f| %>
+    <div class="field">
+      <%= f.label :payed_on_gteq, "支払日" %>
+      <%= f.date_field :payed_on_gteq %>
+      〜
+      <%= f.date_field :payed_on_lteq %>
+    </div>
 
-  <div class="field">
-    <%= f.label :user_id_eq, "ユーザー" %>
-    <%= f.select :user_id_eq, User.all.collect { |u| [ u.email, u.id ] }, include_blank: true %>
-  </div>
+    <div class="field">
+      <%= f.label :user_id_eq, "ユーザー" %>
+      <%= f.select :user_id_eq, User.all.collect { |u| [ u.email, u.id ] }, include_blank: true %>
+    </div>
 
-  <div class="field">
-    <%= f.label :payment_classification_id_eq, "支払分類" %>
-    <%= f.select :payment_classification_id_eq, PaymentClassification.all.collect { |c| [ c.name, c.id ] }, include_blank: true %>
-  </div>
+    <div class="field">
+      <%= f.label :payment_classification_id_eq, "支払分類" %>
+      <%= f.select :payment_classification_id_eq, PaymentClassification.all.collect { |c| [ c.name, c.id ] }, include_blank: true %>
+    </div>
 
-  <div class="field">
-    <%= f.label :payment_method_id_eq, "支払方法" %>
-    <%= f.select :payment_method_id_eq, PaymentMethod.all.collect { |m| [ m.name, m.id ] }, include_blank: true %>
-  </div>
-  
-  <div class="actions">
-    <%= f.submit "検索" %>
-  </div>
-<% end %>
+    <div class="field">
+      <%= f.label :payment_method_id_eq, "支払方法" %>
+      <%= f.select :payment_method_id_eq, PaymentMethod.all.collect { |m| [ m.name, m.id ] }, include_blank: true %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "検索" %>
+    </div>
+  <% end %>
+</div>
+
 
 合計金額：<%= @payments_total_amount %>
 
