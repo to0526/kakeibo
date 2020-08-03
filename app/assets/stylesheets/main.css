@@ -1,0 +1,37 @@
+main {
+  width: 700px;
+  margin: 0 auto;
+}
+
+main h2 {
+  border-left: 10px solid teal;
+  border-bottom: 1px solid teal;
+  padding: 5px 10px;
+}
+
+main form .field label {
+  margin-bottom: 20px;
+}
+
+main form .field label {
+  width: 90px;
+  display: inline-block;
+}
+
+main form .field input[type="date"],
+main form .field input[type="number"],
+main form .field select,
+main form .field textarea {
+  padding: 5px;
+  width: 260px;
+}
+
+main form .actions input[type="submit"] {
+  margin-left: 95px;
+  background-color: navy;
+  padding: 10px 20px;
+  border: 1px solid navy;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+}

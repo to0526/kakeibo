@@ -26,10 +26,12 @@
         <% end %>
       </nav>
     </header>
-    <div>
-      <p id="notice"><%= flash[:notice] %></p>
-      <p id="alert"><%= flash[:alert] %></p>
-    </div>
-    <%= yield %>
+    <main>
+      <div>
+        <p id="notice"><%= flash[:notice] %></p>
+        <p id="alert"><%= flash[:alert] %></p>
+      </div>
+      <%= yield %>
+    </main>
   </body>
 </html>
