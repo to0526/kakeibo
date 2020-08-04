@@ -1,0 +1,48 @@
+form .field label {
+  margin-bottom: 20px;
+}
+
+form .field label {
+  width: 70px;
+  display: inline-block;
+}
+
+form .field input[type="date"],
+form .field input[type="number"],
+form .field select,
+form .field textarea {
+  padding: 5px;
+  width: 260px;
+}
+
+form .field .field_with_errors {
+  display: inline;
+}
+
+form .field .field_with_errors label {
+  color: red;
+}
+
+form .field .field_with_errors input[type="date"],
+form .field .field_with_errors input[type="number"],
+form .field .field_with_errors select,
+form .field .field_with_errors textarea {
+  border: 1px solid red;
+}
+
+form .actions input[type="submit"] {
+  margin-left: 75px;
+  background-color: navy;
+  padding: 10px 20px;
+  border: 1px solid navy;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+}
+
+form #error_explanation {
+  background-color: rgba(255, 0, 0, 0.1);
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}

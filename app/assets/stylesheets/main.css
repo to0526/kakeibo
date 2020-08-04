@@ -9,55 +9,6 @@ main h2 {
   padding: 5px 10px;
 }
 
-main form .field label {
-  margin-bottom: 20px;
-}
-
-main form .field label {
-  width: 70px;
-  display: inline-block;
-}
-
-main form .field input[type="date"],
-main form .field input[type="number"],
-main form .field select,
-main form .field textarea {
-  padding: 5px;
-  width: 260px;
-}
-
-main form .field .field_with_errors {
-  display: inline;
-}
-
-main form .field .field_with_errors label {
-  color: red;
-}
-
-main form .field .field_with_errors input[type="date"],
-main form .field .field_with_errors input[type="number"],
-main form .field .field_with_errors select,
-main form .field .field_with_errors textarea {
-  border: 1px solid red;
-}
-
-main form .actions input[type="submit"] {
-  margin-left: 75px;
-  background-color: navy;
-  padding: 10px 20px;
-  border: 1px solid navy;
-  border-radius: 10px;
-  cursor: pointer;
-  color: white;
-}
-
-main form #error_explanation {
-  background-color: rgba(255, 0, 0, 0.1);
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-
 main #search_field {
   border: 1px solid olive;
   padding: 10px;
