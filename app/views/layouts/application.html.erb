@@ -16,10 +16,11 @@
       <nav>
         <% if current_user %>
           <ul class="clearfix">
-            <li><%= link_to "支払金額一覧", payments_path %></li>
-            <li><%= link_to "支払金額追加", new_payment_path %></li>
-            <li><%= link_to "支払分類", payment_classifications_path %></li>
-            <li><%= link_to "支払方法", payment_methods_path %></li>
+            <li><%= link_to "収支一覧", payments_path %></li>
+            <li><%= link_to "支払", new_payment_path %></li>
+            <li><%= link_to "収入", "#" %></li>
+            <li><%= link_to "収支分類", payment_classifications_path %></li>
+            <li><%= link_to "収支方法", payment_methods_path %></li>
             <li><%= link_to "ユーザー", users_path %></li>
             <li><%= link_to "ログアウト", :logout, method: :post %></li>
           </ul>
