@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root to: "payments#index"
+  resources :items
+  root to: "items#index"
   resources :payments
   resources :payment_classifications
   resources :payment_methods

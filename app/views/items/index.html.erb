@@ -1,0 +1,75 @@
+<h2>収支一覧</h2>
+
+<div id="search_field">
+  <h3>検索</h3>
+  <%= search_form_for @q do |f| %>
+    <div class="field">
+      <%= f.label :payed_on_gteq, "支払日" %>
+      <%= f.date_field :payed_on_gteq %>
+      〜
+      <%= f.date_field :payed_on_lteq %>
+    </div>
+
+    <div class="field">
+      <%= f.label :user_id_eq, "ユーザー" %>
+      <%= f.select :user_id_eq, User.all.collect { |u| [ u.email, u.id ] }, include_blank: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :payment_classification_id_eq, "支払分類" %>
+      <%= f.select :payment_classification_id_eq, PaymentClassification.all.collect { |c| [ c.name, c.id ] }, include_blank: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :payment_method_id_eq, "支払方法" %>
+      <%= f.select :payment_method_id_eq, PaymentMethod.all.collect { |m| [ m.name, m.id ] }, include_blank: true %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "検索" %>
+    </div>
+  <% end %>
+</div>
+
+
+<b>合計金額：<%= @items_total_amount %></b>
+
+<table>
+  <% @items_amount_with_classification.each do |items_amount_with_classification| %>
+    <tr>
+      <th><%= items_amount_with_classification[:payment_classification] %></th>
+      <td align="right"><%= items_amount_with_classification[:amount] %></td>
+    </tr>
+  <% end %>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>支払日</th>
+      <th>支払金額</th>
+      <th>ユーザー</th>
+      <th>支払分類</th>
+      <th>支払方法</th>
+      <th>備考</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.payed_on %></td>
+        <td align="right"><%= item.amount.to_s(:delimited) %></td>
+        <td><%= item.user.name %></td>
+        <td><%= item.payment_classification.name %></td>
+        <td><%= item.payment_method.name %></td>
+        <td><%= item.note %></td>
+        <td><%= link_to '編集', edit_item_path(item) %></td>
+        <td><%= link_to '削除', item, method: :delete, data: { confirm: '削除してよろしいですか？' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to '新規登録', new_item_path, class: "new_link" %>
