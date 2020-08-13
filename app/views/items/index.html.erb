@@ -65,11 +65,9 @@
         <td><%= item.payment_classification.name %></td>
         <td><%= item.payment_method.name %></td>
         <td><%= item.note %></td>
-        <td><%= link_to '編集', edit_item_path(item) %></td>
+        <td><%= link_to '編集', edit_payment_path(item) %></td>
         <td><%= link_to '削除', item, method: :delete, data: { confirm: '削除してよろしいですか？' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<%= link_to '新規登録', new_item_path, class: "new_link" %>

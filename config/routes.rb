@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :items
+  resources :items, only: [:index]
   root to: "items#index"
-  resources :payments
+  resources :payments, only: [:new, :create, :edit, :update, :destroy]
   resources :payment_classifications
   resources :payment_methods
   resources :users
