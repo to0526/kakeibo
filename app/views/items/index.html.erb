@@ -1,4 +1,4 @@
-<h2>支払金額一覧</h2>
+<h2>収支一覧</h2>
 
 <div id="search_field">
   <h3>検索</h3>
@@ -32,13 +32,13 @@
 </div>
 
 
-<b>合計金額：<%= @payments_total_amount %></b>
+<b>合計金額：<%= @items_total_amount %></b>
 
 <table>
-  <% @payments_amount_with_classification.each do |payments_amount_with_classification| %>
+  <% @items_amount_with_classification.each do |items_amount_with_classification| %>
     <tr>
-      <th><%= payments_amount_with_classification[:payment_classification] %></th>
-      <td align="right"><%= payments_amount_with_classification[:amount] %></td>
+      <th><%= items_amount_with_classification[:payment_classification] %></th>
+      <td align="right"><%= items_amount_with_classification[:amount] %></td>
     </tr>
   <% end %>
 </table>
@@ -57,19 +57,23 @@
   </thead>
 
   <tbody>
-    <% @payments.each do |payment| %>
+    <% @items.each do |item| %>
       <tr>
-        <td><%= payment.payed_on %></td>
-        <td align="right"><%= payment.amount.to_s(:delimited) %></td>
-        <td><%= payment.user.name %></td>
-        <td><%= payment.payment_classification.name %></td>
-        <td><%= payment.payment_method.name %></td>
-        <td><%= payment.note %></td>
-        <td><%= link_to '編集', edit_payment_path(payment) %></td>
-        <td><%= link_to '削除', payment, method: :delete, data: { confirm: '削除してよろしいですか？' } %></td>
+        <td><%= item.payed_on %></td>
+        <td align="right"><%= item.amount.to_s(:delimited) %></td>
+        <td><%= item.user.name %></td>
+        <td><%= item.payment_classification.name %></td>
+        <td><%= item.payment_method.name %></td>
+        <td><%= item.note %></td>
+        <td>
+          <% if item.type == "Payment" %>
+            <%= link_to '編集', edit_payment_path(item) %>
+          <% elsif item.type == "Income" %>
+            <%= link_to '編集', edit_income_path(item) %>
+          <% end %>
+        </td>
+        <td><%= link_to '削除', item, method: :delete, data: { confirm: '削除してよろしいですか？' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<%= link_to '新規登録', new_payment_path, class: "new_link" %>

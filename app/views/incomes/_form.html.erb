@@ -1,10 +1,10 @@
-<%= form_with(model: payment, local: true) do |form| %>
-  <% if payment.errors.any? %>
+<%= form_with(model: income, local: true) do |form| %>
+  <% if income.errors.any? %>
     <div id="error_explanation">
-      <h3><%= "#{payment.errors.count}個のエラーがあります" %></h3>
+      <h3><%= "#{income.errors.count}個のエラーがあります" %></h3>
 
       <ul>
-        <% payment.errors.full_messages.each do |message| %>
+        <% income.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>

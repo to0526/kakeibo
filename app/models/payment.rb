@@ -1,8 +1,9 @@
-class Payment < ApplicationRecord
-  belongs_to :user
-  belongs_to :payment_classification
-  belongs_to :payment_method
+class Payment < Item
+  before_save :make_negative_amount, if: Proc.new { |payment| payment.amount > 0 }
 
-  validates :amount, presence: true
-  validates :payed_on, presence: true
+  private
+
+  def make_negative_amount
+    self.amount = amount * -1
+  end
 end
