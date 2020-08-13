@@ -1,7 +1,7 @@
 <%= form_with(model: income, local: true) do |form| %>
   <% if income.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(income.errors.count, "error") %> prohibited this income from being saved:</h2>
+      <h3><%= "#{income.errors.count}個のエラーがあります" %></h3>
 
       <ul>
         <% income.errors.full_messages.each do |message| %>
@@ -11,7 +11,38 @@
     </div>
   <% end %>
 
+  <div class="field">
+    <%= form.label :payed_on %>
+    <%= form.date_field :payed_on %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount %>
+    <%= form.number_field :amount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= current_user.name %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :payment_classification_id %>
+    <%= form.select :payment_classification_id, PaymentClassification.all.order(:sort).collect { |c| [ c.name, c.id ] } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :payment_method_id %>
+    <%= form.select :payment_method_id, PaymentMethod.all.collect { |m| [ m.name, m.id ] } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :note %>
+    <%= form.text_area :note %>
+  </div>
+
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "保存" %>
   </div>
 <% end %>

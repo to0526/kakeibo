@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-  before_action :set_payment, only: [:show, :edit, :update, :destroy]
+  before_action :set_payment, only: [:edit, :update, :destroy]
 
   def new
     @payment = Payment.new
@@ -12,7 +12,7 @@ class PaymentsController < ApplicationController
     @payment = Payment.new(payment_params)
 
     if @payment.save
-      redirect_to new_payment_url, notice: '支払を登録しました'
+      redirect_to items_url, notice: '支払を登録しました'
     else
       render :new
     end

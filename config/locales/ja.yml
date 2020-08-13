@@ -2,6 +2,7 @@ ja:
   activerecord:
     models:
       payment: 支払
+      income: 収入
     attributes:
       payment:
         payed_on: 支払日
@@ -9,3 +10,11 @@ ja:
         user_id: ユーザー
         payment_classification_id: 支払分類
         payment_method_id: 支払方法
+        note: 備考
+      income:
+        payed_on: 支払日
+        amount: 支払金額
+        user_id: ユーザー
+        payment_classification_id: 支払分類
+        payment_method_id: 支払方法
+        note: 備考
