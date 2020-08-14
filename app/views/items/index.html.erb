@@ -60,7 +60,11 @@
     <% @items.each do |item| %>
       <tr>
         <td><%= item.payed_on %></td>
-        <td align="right"><%= item.amount.to_s(:delimited) %></td>
+        <% if item.type == "Payment" %>
+          <td align="right" class="red"><%= item.amount.to_s(:delimited) %></td>
+        <% elsif item.type == "Income" %>
+          <td align="right" class="blue"><%= item.amount.to_s(:delimited) %></td>
+        <% end %>
         <td><%= item.user.name %></td>
         <td><%= item.payment_classification.name %></td>
         <td><%= item.payment_method.name %></td>
