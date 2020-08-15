@@ -3,24 +3,28 @@
 <div id="search_field">
   <h3>検索</h3>
   <%= search_form_for @q do |f| %>
-    <div class="field">
-      <%= f.label :payed_on_gteq, "支払日" %>
-      <%= f.select :payed_on_gteq, search_payed_on_options, include_blank: true %>
+    <div>
+      <div class="field inline">
+        <%= f.label :payed_on_gteq, "支払日" %>
+        <%= f.select :payed_on_gteq, search_payed_on_options, include_blank: true %>
+      </div>
+
+      <div class="field inline">
+        <%= f.label :user_id_eq, "ユーザー" %>
+        <%= f.select :user_id_eq, User.name_with_id, include_blank: true %>
+      </div>
     </div>
 
-    <div class="field">
-      <%= f.label :user_id_eq, "ユーザー" %>
-      <%= f.select :user_id_eq, User.name_with_id, include_blank: true %>
-    </div>
+    <div>
+      <div class="field inline">
+        <%= f.label :payment_classification_id_eq, "収支分類" %>
+        <%= f.select :payment_classification_id_eq, PaymentClassification.name_with_id, include_blank: true %>
+      </div>
 
-    <div class="field">
-      <%= f.label :payment_classification_id_eq, "支払分類" %>
-      <%= f.select :payment_classification_id_eq, PaymentClassification.name_with_id, include_blank: true %>
-    </div>
-
-    <div class="field">
-      <%= f.label :payment_method_id_eq, "支払方法" %>
-      <%= f.select :payment_method_id_eq, PaymentMethod.name_with_id, include_blank: true %>
+      <div class="field inline">
+        <%= f.label :payment_method_id_eq, "収支方法" %>
+        <%= f.select :payment_method_id_eq, PaymentMethod.name_with_id, include_blank: true %>
+      </div>
     </div>
 
     <div class="actions">

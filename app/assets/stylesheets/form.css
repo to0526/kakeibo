@@ -1,5 +1,19 @@
+form .inline {
+  display: inline;
+}
+
 form .field label {
   margin-bottom: 20px;
+}
+
+form .field label {
+  width: 70px;
+  display: inline-block;
+}
+
+form .field label {
+  margin-bottom: 20px;
+  margin-left: 20px;
 }
 
 form .field label {
@@ -12,7 +26,7 @@ form .field input[type="number"],
 form .field select,
 form .field textarea {
   padding: 5px;
-  width: 260px;
+  width: 200px;
 }
 
 form .field .field_with_errors {
@@ -31,7 +45,7 @@ form .field .field_with_errors textarea {
 }
 
 form .actions input[type="submit"] {
-  margin-left: 75px;
+  margin-left: 95px;
   background-color: navy;
   padding: 10px 20px;
   border: 1px solid navy;
