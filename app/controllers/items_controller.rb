@@ -1,9 +1,11 @@
 class ItemsController < ApplicationController
   def index
-    unless params[:q]
+    if params[:q].nil?
       params[:q] = {}
       params[:q][:payed_on_gteq] = Date.today.beginning_of_month.to_s
       params[:q][:payed_on_lteq] = Date.today.end_of_month.to_s
+    elsif params[:q][:payed_on_gteq].present?
+      params[:q][:payed_on_lteq] = params[:q][:payed_on_gteq].to_date.end_of_month.to_s
     end
     @q = Item.ransack(params[:q])
     @items = @q.result(distinct: true).order(payed_on: :desc)
