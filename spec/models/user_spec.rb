@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  describe ".name_with_id" do
+    let!(:user1) { FactoryBot.create(:user, name: "大悟", email: "daigo@example.com") }
+    let!(:user2) { FactoryBot.create(:user, name: "ノブ", email: "nobu@example.com") }
+
+    it { expect(User.name_with_id).to match_array([["大悟", user1.id], ["ノブ", user2.id]]) }
+  end
+
   describe "validation" do
     context "名前が未入力の時" do
       let(:user) { FactoryBot.build(:user, name: "") }
