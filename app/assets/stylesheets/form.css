@@ -21,6 +21,7 @@ form .field label {
   display: inline-block;
 }
 
+form .field input[type="text"],
 form .field input[type="date"],
 form .field input[type="number"],
 form .field select,
@@ -37,6 +38,7 @@ form .field .field_with_errors label {
   color: red;
 }
 
+form .field .field_with_errors input[type="text"],
 form .field .field_with_errors input[type="date"],
 form .field .field_with_errors input[type="number"],
 form .field .field_with_errors select,

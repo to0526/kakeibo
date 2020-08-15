@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :items, only: [:index]
   root to: "items#index"
   resources :payments, only: [:new, :create, :edit, :update, :destroy]
-  resources :payment_classifications
+  resources :payment_classifications, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :payment_methods
   resources :users
   resources :user_sessions, only: [:create]
