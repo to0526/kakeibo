@@ -5,24 +5,22 @@
   <%= search_form_for @q do |f| %>
     <div class="field">
       <%= f.label :payed_on_gteq, "支払日" %>
-      <%= f.date_field :payed_on_gteq %>
-      〜
-      <%= f.date_field :payed_on_lteq %>
+      <%= f.select :payed_on_gteq, (Date.new(2020,07,01)..Date.today.beginning_of_month).to_a.select{|d|d.day==1}.map{|d|[d.strftime("%Y/%m"),d]}, include_blank: true %>
     </div>
 
     <div class="field">
       <%= f.label :user_id_eq, "ユーザー" %>
-      <%= f.select :user_id_eq, User.all.collect { |u| [ u.email, u.id ] }, include_blank: true %>
+      <%= f.select :user_id_eq, User.all.map { |u| [ u.name, u.id ] }, include_blank: true %>
     </div>
 
     <div class="field">
       <%= f.label :payment_classification_id_eq, "支払分類" %>
-      <%= f.select :payment_classification_id_eq, PaymentClassification.all.collect { |c| [ c.name, c.id ] }, include_blank: true %>
+      <%= f.select :payment_classification_id_eq, PaymentClassification.all.map { |c| [ c.name, c.id ] }, include_blank: true %>
     </div>
 
     <div class="field">
       <%= f.label :payment_method_id_eq, "支払方法" %>
-      <%= f.select :payment_method_id_eq, PaymentMethod.all.collect { |m| [ m.name, m.id ] }, include_blank: true %>
+      <%= f.select :payment_method_id_eq, PaymentMethod.all.map { |m| [ m.name, m.id ] }, include_blank: true %>
     </div>
 
     <div class="actions">
