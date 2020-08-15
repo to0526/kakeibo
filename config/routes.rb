@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :payments, only: [:new, :create, :edit, :update, :destroy]
   resources :payment_classifications, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :payment_methods, only: [:index, :new, :create, :edit, :update, :destroy]
-  resources :users
+  resources :users, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :user_sessions, only: [:create]
   get 'login' => 'user_sessions#new', :as => :login
   post 'logout' => 'user_sessions#destroy', :as => :logout
