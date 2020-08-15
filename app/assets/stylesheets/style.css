@@ -19,3 +19,11 @@
 .float-right {
   float: right;
 }
+
+#notice {
+  color: green;
+}
+
+#alert {
+  color: red;
+}

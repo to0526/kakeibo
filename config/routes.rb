@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   resources :items, only: [:index]
   root to: "items#index"
   resources :payments, only: [:new, :create, :edit, :update, :destroy]
-  resources :payment_classifications
-  resources :payment_methods
-  resources :users
+  resources :payment_classifications, only: [:index, :new, :create, :edit, :update, :destroy]
+  resources :payment_methods, only: [:index, :new, :create, :edit, :update, :destroy]
+  resources :users, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :user_sessions, only: [:create]
   get 'login' => 'user_sessions#new', :as => :login
   post 'logout' => 'user_sessions#destroy', :as => :logout

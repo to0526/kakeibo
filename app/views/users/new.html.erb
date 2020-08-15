@@ -1,7 +1,7 @@
-<h1>ユーザー新規登録</h1>
+<h2>ユーザー新規登録</h2>
 
 <%= render 'form', user: @user %>
 
 <% if current_user %>
-  <%= link_to '一覧', users_path %>
+  <%= link_to '一覧', users_path, class: "link" %>
 <% end %>

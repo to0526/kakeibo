@@ -1,7 +1,7 @@
 <%= form_with(model: payment_classification, local: true) do |form| %>
   <% if payment_classification.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(payment_classification.errors.count, "error") %> prohibited this payment_classification from being saved:</h2>
+      <h3><%= "#{payment_classification.errors.count}個のエラーがあります" %></h3>
 
       <ul>
         <% payment_classification.errors.full_messages.each do |message| %>
@@ -12,17 +12,17 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :purpose, "目的" %>
+    <%= form.label :purpose %>
     <%= form.select :purpose, [["生活に必要", :required], ["楽しみのため", :enjoyment]] %>
   </div>
 
   <div class="field">
-    <%= form.label :name, "名称" %>
+    <%= form.label :name %>
     <%= form.text_field :name %>
   </div>
 
   <div class="field">
-    <%= form.label :sort, "並び順" %>
+    <%= form.label :sort %>
     <%= form.number_field :sort %>
   </div>
 

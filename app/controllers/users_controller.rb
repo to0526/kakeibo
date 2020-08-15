@@ -1,11 +1,8 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:edit, :update, :destroy]
 
   def index
     @users = User.all
-  end
-
-  def show
   end
 
   def new
@@ -19,7 +16,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to @user, notice: 'ユーザーを作成しました'
+      redirect_to users_url, notice: 'ユーザーを作成しました'
     else
       render :new
     end
@@ -27,7 +24,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: 'ユーザーを更新しました'
+      redirect_to users_url, notice: 'ユーザーを更新しました'
     else
       render :edit
     end

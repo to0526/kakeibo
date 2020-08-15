@@ -3,6 +3,9 @@ ja:
     models:
       payment: 支払
       income: 収入
+      payment_classification: 収支分類
+      payment_method: 収支方法
+      user: ユーザー
     attributes:
       payment:
         payed_on: 支払日
@@ -18,3 +21,19 @@ ja:
         payment_classification_id: 支払分類
         payment_method_id: 支払方法
         note: 備考
+      payment_classification:
+        name: 名称
+        sort: 並び順
+        purpose: 目的
+      payment_method:
+        name: 名称
+      user:
+        password: パスワード
+        password_confirmation: パスワード(確認)
+        name: 名前
+        email: メールアドレス
+  enums:
+    payment_classification:
+      purpose:
+        required: 生活に必要
+        enjoyment: 楽しみのため

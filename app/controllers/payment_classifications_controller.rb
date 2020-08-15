@@ -1,11 +1,8 @@
 class PaymentClassificationsController < ApplicationController
-  before_action :set_payment_classification, only: [:show, :edit, :update, :destroy]
+  before_action :set_payment_classification, only: [:edit, :update, :destroy]
 
   def index
     @payment_classifications = PaymentClassification.all.order(:sort)
-  end
-
-  def show
   end
 
   def new
@@ -19,7 +16,7 @@ class PaymentClassificationsController < ApplicationController
     @payment_classification = PaymentClassification.new(payment_classification_params)
 
     if @payment_classification.save
-      redirect_to @payment_classification, notice: '支払い分類を作成しました'
+      redirect_to payment_classifications_url, notice: '収支分類を作成しました'
     else
       render :new
     end
@@ -27,7 +24,7 @@ class PaymentClassificationsController < ApplicationController
 
   def update
     if @payment_classification.update(payment_classification_params)
-      redirect_to @payment_classification, notice: '支払い分類を更新しました'
+      redirect_to payment_classifications_url, notice: '収支分類を更新しました'
     else
       render :edit
     end
@@ -35,9 +32,9 @@ class PaymentClassificationsController < ApplicationController
 
   def destroy
     if @payment_classification.destroy
-      redirect_to payment_classifications_url, notice: '支払い分類を削除しました'
+      redirect_to payment_classifications_url, notice: '収支分類を削除しました'
     else
-      redirect_to payment_classifications_url, alert: '支払い分類を削除できませんでした'
+      redirect_to payment_classifications_url, alert: '収支分類を削除できませんでした'
     end
   end
 
