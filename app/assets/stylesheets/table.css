@@ -12,6 +12,14 @@ table th, table td {
   border-right: 1px solid teal;
 }
 
+table th.multi {
+  width: 200px;
+}
+
+table td.multi {
+  width: 100px;
+}
+
 table tr:nth-child(even) {
   background-color: rgba(0, 0, 128, 0.1)
 }

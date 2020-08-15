@@ -3,26 +3,28 @@
 <div id="search_field">
   <h3>検索</h3>
   <%= search_form_for @q do |f| %>
-    <div class="field">
-      <%= f.label :payed_on_gteq, "支払日" %>
-      <%= f.date_field :payed_on_gteq %>
-      〜
-      <%= f.date_field :payed_on_lteq %>
+    <div>
+      <div class="field inline">
+        <%= f.label :payed_on_gteq, "支払日" %>
+        <%= f.select :payed_on_gteq, search_payed_on_options, include_blank: true %>
+      </div>
+
+      <div class="field inline">
+        <%= f.label :user_id_eq, "ユーザー" %>
+        <%= f.select :user_id_eq, User.name_with_id, include_blank: true %>
+      </div>
     </div>
 
-    <div class="field">
-      <%= f.label :user_id_eq, "ユーザー" %>
-      <%= f.select :user_id_eq, User.all.collect { |u| [ u.email, u.id ] }, include_blank: true %>
-    </div>
+    <div>
+      <div class="field inline">
+        <%= f.label :payment_classification_id_eq, "収支分類" %>
+        <%= f.select :payment_classification_id_eq, PaymentClassification.name_with_id, include_blank: true %>
+      </div>
 
-    <div class="field">
-      <%= f.label :payment_classification_id_eq, "支払分類" %>
-      <%= f.select :payment_classification_id_eq, PaymentClassification.all.collect { |c| [ c.name, c.id ] }, include_blank: true %>
-    </div>
-
-    <div class="field">
-      <%= f.label :payment_method_id_eq, "支払方法" %>
-      <%= f.select :payment_method_id_eq, PaymentMethod.all.collect { |m| [ m.name, m.id ] }, include_blank: true %>
+      <div class="field inline">
+        <%= f.label :payment_method_id_eq, "収支方法" %>
+        <%= f.select :payment_method_id_eq, PaymentMethod.name_with_id, include_blank: true %>
+      </div>
     </div>
 
     <div class="actions">
@@ -31,17 +33,27 @@
   <% end %>
 </div>
 
-
 <b>合計金額：<%= @items_total_amount %></b>
 
-<table>
-  <% @items_amount_with_classification.each do |items_amount_with_classification| %>
-    <tr>
-      <th><%= items_amount_with_classification[:payment_classification] %></th>
-      <td align="right"><%= items_amount_with_classification[:amount] %></td>
-    </tr>
-  <% end %>
-</table>
+<div class="clearfix">
+  <table class="float-left">
+    <% @items_amount_with_classification[0].each do |item| %>
+      <tr>
+        <th class="multi"><%= item[:payment_classification] %></th>
+        <td class="multi" align="right"><%= item[:amount] %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <table class="float-left">
+    <% @items_amount_with_classification[1].compact.each do |item| %>
+      <tr>
+        <th class="multi"><%= item[:payment_classification] %></th>
+        <td class="multi" align="right"><%= item[:amount] %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
 
 <table>
   <thead>

@@ -3,3 +3,19 @@
   display: block;
   clear: both;
 }
+
+.red {
+  color: red;
+}
+
+.blue {
+  color: blue;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
