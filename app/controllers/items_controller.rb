@@ -17,5 +17,6 @@ class ItemsController < ApplicationController
           amount: @items.where(payment_classification_id: payment_classification.id).map{|item|item.amount}.sum.to_s(:delimited)
         }
       end
+    @items_amount_with_classification = @items_amount_with_classification.in_groups(2, false)
   end
 end

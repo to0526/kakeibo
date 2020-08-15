@@ -33,26 +33,27 @@
   <% end %>
 </div>
 
-
 <b>合計金額：<%= @items_total_amount %></b>
 
-<table>
-  <% @items_amount_with_classification.each_slice(2) do |item_a, item_b| %>
-    <% if item_b %>
+<div class="clearfix">
+  <table class="float-left">
+    <% @items_amount_with_classification[0].each do |item| %>
       <tr>
-        <th class="multi"><%= item_a[:payment_classification] %></th>
-        <td class="multi" align="right"><%= item_a[:amount] %></td>
-        <th class="multi"><%= item_b[:payment_classification] %></th>
-        <td class="multi" align="right"><%= item_b[:amount] %></td>
-      </tr>
-    <% else %>
-      <tr>
-        <th><%= item_a[:payment_classification] %></th>
-        <td class="multi" align="right"><%= item_a[:amount] %></td>
+        <th class="multi"><%= item[:payment_classification] %></th>
+        <td class="multi" align="right"><%= item[:amount] %></td>
       </tr>
     <% end %>
-  <% end %>
-</table>
+  </table>
+
+  <table class="float-left">
+    <% @items_amount_with_classification[1].compact.each do |item| %>
+      <tr>
+        <th class="multi"><%= item[:payment_classification] %></th>
+        <td class="multi" align="right"><%= item[:amount] %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
 
 <table>
   <thead>
