@@ -37,11 +37,20 @@
 <b>合計金額：<%= @items_total_amount %></b>
 
 <table>
-  <% @items_amount_with_classification.each do |items_amount_with_classification| %>
-    <tr>
-      <th><%= items_amount_with_classification[:payment_classification] %></th>
-      <td align="right"><%= items_amount_with_classification[:amount] %></td>
-    </tr>
+  <% @items_amount_with_classification.each_slice(2) do |item_a, item_b| %>
+    <% if item_b %>
+      <tr>
+        <th class="multi"><%= item_a[:payment_classification] %></th>
+        <td class="multi" align="right"><%= item_a[:amount] %></td>
+        <th class="multi"><%= item_b[:payment_classification] %></th>
+        <td class="multi" align="right"><%= item_b[:amount] %></td>
+      </tr>
+    <% else %>
+      <tr>
+        <th><%= item_a[:payment_classification] %></th>
+        <td class="multi" align="right"><%= item_a[:amount] %></td>
+      </tr>
+    <% end %>
   <% end %>
 </table>
 
