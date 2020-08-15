@@ -1,11 +1,8 @@
 class PaymentMethodsController < ApplicationController
-  before_action :set_payment_method, only: [:show, :edit, :update, :destroy]
+  before_action :set_payment_method, only: [:edit, :update, :destroy]
 
   def index
     @payment_methods = PaymentMethod.all
-  end
-
-  def show
   end
 
   def new
@@ -19,7 +16,7 @@ class PaymentMethodsController < ApplicationController
     @payment_method = PaymentMethod.new(payment_method_params)
 
     if @payment_method.save
-      redirect_to @payment_method, notice: '支払い方法を作成しました'
+      redirect_to payment_methods_url, notice: '支払い方法を作成しました'
     else
       render :new
     end
@@ -27,7 +24,7 @@ class PaymentMethodsController < ApplicationController
 
   def update
     if @payment_method.update(payment_method_params)
-      redirect_to @payment_method, notice: '支払い方法を更新しました'
+      redirect_to payment_methods_url, notice: '支払い方法を更新しました'
     else
       render :edit
     end

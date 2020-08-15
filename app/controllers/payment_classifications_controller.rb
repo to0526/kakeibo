@@ -1,11 +1,8 @@
 class PaymentClassificationsController < ApplicationController
-  before_action :set_payment_classification, only: [:show, :edit, :update, :destroy]
+  before_action :set_payment_classification, only: [:edit, :update, :destroy]
 
   def index
     @payment_classifications = PaymentClassification.all.order(:sort)
-  end
-
-  def show
   end
 
   def new

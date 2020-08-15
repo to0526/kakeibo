@@ -3,7 +3,8 @@ ja:
     models:
       payment: 支払
       income: 収入
-      payment_classification: 終始分類
+      payment_classification: 収支分類
+      payment_method: 収支方法
     attributes:
       payment:
         payed_on: 支払日
@@ -23,6 +24,8 @@ ja:
         name: 名称
         sort: 並び順
         purpose: 目的
+      payment_method:
+        name: 名称
   enums:
     payment_classification:
       purpose:

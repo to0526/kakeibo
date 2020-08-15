@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: "items#index"
   resources :payments, only: [:new, :create, :edit, :update, :destroy]
   resources :payment_classifications, only: [:index, :new, :create, :edit, :update, :destroy]
-  resources :payment_methods
+  resources :payment_methods, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :users
   resources :user_sessions, only: [:create]
   get 'login' => 'user_sessions#new', :as => :login
