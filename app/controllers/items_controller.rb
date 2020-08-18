@@ -9,7 +9,8 @@ class ItemsController < ApplicationController
     end
     @q = Item.ransack(params[:q])
     @items = @q.result(distinct: true).order(payed_on: :desc)
-    @items_total_amount = @items.map{|item|item.amount}.sum.to_s(:delimited)
+    @payments_total_amount = @items.where(type: "Payment").map { |item| item.amount }.sum
+    @incomes_total_amount = @items.where(type: "Income").map { |item| item.amount }.sum
     @items_amount_with_classification =
       PaymentClassification.all.order(:sort).each_with_object([]) do |payment_classification, arr|
         arr << {
