@@ -21,6 +21,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: setup
-      run: docker-compose up -d
+      run: |
+        docker-compose up -d
+        docker-compose exec -T app bin/rails db:create db:migrate
     - name: Run tests
       run: docker-compose exec -T app bundle exec rspec
