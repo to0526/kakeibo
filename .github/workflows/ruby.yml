@@ -24,5 +24,7 @@ jobs:
       run: |
         docker-compose up -d
         docker-compose exec -T app bin/rails db:create db:migrate
+        docker-compose exec -T app bin/yarn
+        docker-compose exec -T app bin/webpack
     - name: Run tests
       run: docker-compose exec -T app bundle exec rspec
