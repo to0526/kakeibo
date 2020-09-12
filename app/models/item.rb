@@ -10,7 +10,7 @@ class Item < ApplicationRecord
 
   def self.amount_with_date(date:)
     total_amount = 0
-    data = monthly(date).group(:payed_on).sum(:amount).each_with_object({}) do |(date, amount), hash|
+    data = monthly(date).order(:payed_on).group(:payed_on).sum(:amount).each_with_object({}) do |(date, amount), hash|
       total_amount += amount
       hash[date.day] = total_amount
     end
