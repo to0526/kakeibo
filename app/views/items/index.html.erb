@@ -48,6 +48,8 @@
   </tr>
 </table>
 
+<%= line_chart beginning_of_months.map { |date| Item.amount_with_date(date: date) } %>
+
 <div class="clearfix">
   <table class="float-left">
     <% @items_amount_with_classification[0].each do |item| %>
