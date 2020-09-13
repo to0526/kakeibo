@@ -50,6 +50,11 @@
 
 <%= line_chart beginning_of_months.map { |date| Item.amount_with_date(date: date) } %>
 
+<% beginning_of_months.each do |date| %>
+  <%= date.strftime('%Y-%m') %>
+  <%= pie_chart Payment.name_with_amount(date: date) %>
+<% end %>
+
 <div class="clearfix">
   <table class="float-left">
     <% @items_amount_with_classification[0].each do |item| %>
