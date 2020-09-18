@@ -96,7 +96,7 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
-    jbuilder (2.10.0)
+    jbuilder (2.10.1)
       activesupport (>= 5.0.0)
     jwt (2.2.2)
     listen (3.2.1)
@@ -270,7 +270,7 @@ DEPENDENCIES
   chartkick
   enum_help
   factory_bot_rails
-  jbuilder (~> 2.7)
+  jbuilder (~> 2.10)
   listen (~> 3.2)
   pg
   puma (~> 4.1)
