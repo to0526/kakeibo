@@ -3,7 +3,6 @@
 <h2>収支一覧</h2>
 
 <div id='hello'>
-  {{message}}
   <app></app>
 </div>
 
@@ -54,13 +53,6 @@
     <td align="right"><%= (@incomes_total_amount + @payments_total_amount).to_s(:delimited) %></td>
   </tr>
 </table>
-
-<%= line_chart beginning_of_months.map { |date| Item.amount_with_date(date: date) } %>
-
-<% beginning_of_months.each do |date| %>
-  <%= date.strftime('%Y-%m') %>
-  <%= pie_chart Payment.name_with_amount(date: date) %>
-<% end %>
 
 <div class="clearfix">
   <table class="float-left">
