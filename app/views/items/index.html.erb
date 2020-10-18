@@ -2,10 +2,6 @@
 
 <h2>収支一覧</h2>
 
-<div id='hello'>
-  <app></app>
-</div>
-
 <div id="search_field">
   <h3>検索</h3>
   <%= search_form_for @q do |f| %>
@@ -53,6 +49,15 @@
     <td align="right"><%= (@incomes_total_amount + @payments_total_amount).to_s(:delimited) %></td>
   </tr>
 </table>
+
+<div id='hello'>
+  <app></app>
+</div>
+
+<% beginning_of_months.each do |date| %>
+  <%= date.strftime('%Y-%m') %>
+  <%= pie_chart Payment.name_with_amount(date: date) %>
+<% end %>
 
 <div class="clearfix">
   <table class="float-left">
