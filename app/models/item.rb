@@ -9,11 +9,12 @@ class Item < ApplicationRecord
   validates :payed_on, presence: true
 
   def self.amount_with_date(date:)
-    total_amount = 0
-    data = monthly(date).order(:payed_on).group(:payed_on).sum(:amount).each_with_object({}) do |(date, amount), hash|
-      total_amount += amount
-      hash[date.day] = total_amount
+    total_amount_until_date = 0
+    dates = (date.beginning_of_month..date.end_of_month).to_a
+    amount_by_day = dates.map do |date|
+      total_amount_until_date += where(payed_on: date).sum(:amount)
+      total_amount_until_date
     end
-    {name: "#{date.strftime('%Y-%m')}", data: data}
+    {label: "#{date.strftime('%Y/%m')}", data: amount_by_day}
   end
 end
