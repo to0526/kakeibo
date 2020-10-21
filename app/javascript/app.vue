@@ -1,15 +1,21 @@
 <template>
   <div>
-    <input type="checkbox" id="2020/07" v-on:click="toggle('2020/07')">
-      <label for="2020/07">2020/07</label>
-    </input>
-    <input type="checkbox" id="2020/08" v-on:click="toggle('2020/08')">
-      <label for="2020/08">2020/08</label>
-    </input>
-    <input type="checkbox" id="2020/09" v-on:click="toggle('2020/09')">
-      <label for="2020/09">2020/09</label>
-    </input>
-    <LineChart v-bind:chartData="datacollection"></LineChart>
+    <div v-if="loaded">
+      <input type="checkbox" id="2020/07" v-on:click="toggle('2020/07')">
+        <label for="2020/07">2020/07</label>
+      </input>
+      <input type="checkbox" id="2020/08" v-on:click="toggle('2020/08')">
+        <label for="2020/08">2020/08</label>
+      </input>
+      <input type="checkbox" id="2020/09" v-on:click="toggle('2020/09')">
+        <label for="2020/09">2020/09</label>
+      </input>
+      <LineChart v-bind:chartData="datacollection"></LineChart>
+    </div>
+    <div v-else>
+      loading...
+    </div>
+
   </div>
 </template>
 
@@ -29,20 +35,8 @@ export default {
         datasets: null,
       },
       dates: dates,
-      foo: [
-        {
-          label: '2020/07',
-          data: [100,200,300],
-        },
-        {
-          label: '2020/08',
-          data: [0,100,200,300],
-        },
-        {
-          label: '2020/09',
-          data: [0,0,100,200,300],
-        }
-      ],
+      all_datasets: [],
+      loaded: false,
     }
   },
   methods: {
@@ -50,7 +44,7 @@ export default {
       const datasets = this.datacollection.datasets
       const dataset = datasets.find(x => x.label === month)
       let new_datasets = []
-      const new_dataset = this.foo.find(x => x.label === month)
+      const new_dataset = this.all_datasets.find(x => x.label === month)
 
       if (dataset === undefined) {
         new_datasets = datasets.concat()
@@ -64,6 +58,13 @@ export default {
         datasets: new_datasets,
       }
     }
+  },
+  created() {
+    fetch("/api/payments")
+      .then(response => response.json())
+      .then(data => this.all_datasets = data)
+      .catch(e => alert(e))
+    this.loaded = true
   }
 }
 </script>
