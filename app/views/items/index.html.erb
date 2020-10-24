@@ -1,3 +1,5 @@
+<%= javascript_pack_tag 'hello_vue' %>
+
 <h2>収支一覧</h2>
 
 <div id="search_field">
@@ -48,12 +50,14 @@
   </tr>
 </table>
 
-<%= line_chart beginning_of_months.map { |date| Item.amount_with_date(date: date) } %>
+<div id='hello'>
+  <app></app>
+</div>
 
-<% beginning_of_months.each do |date| %>
-  <%= date.strftime('%Y-%m') %>
-  <%= pie_chart Payment.name_with_amount(date: date) %>
-<% end %>
+<%# beginning_of_months.each do |date| %>
+  <%#= date.strftime('%Y-%m') %>
+  <%#= pie_chart Payment.name_with_amount(date: date) %>
+<%# end %>
 
 <div class="clearfix">
   <table class="float-left">
