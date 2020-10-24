@@ -15,7 +15,8 @@ export default {
     return {
       options: {
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        spanGaps: true,
       }
     }
   },
