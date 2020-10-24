@@ -7,8 +7,6 @@
 Rails.application.config.content_security_policy do |policy|
   if Rails.env.development?
     policy.script_src :self, :https, :unsafe_eval
-  else
-    policy.script_src :self, :https
   end
 #   policy.default_src :self, :https
 #   policy.font_src    :self, :https, :data
