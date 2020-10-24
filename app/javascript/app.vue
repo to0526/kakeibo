@@ -1,15 +1,11 @@
 <template>
   <div>
     <div v-if="loaded">
-      <input type="checkbox" id="2020/07" v-on:click="toggle('2020/07')">
-        <label for="2020/07">2020/07</label>
-      </input>
-      <input type="checkbox" id="2020/08" v-on:click="toggle('2020/08')">
-        <label for="2020/08">2020/08</label>
-      </input>
-      <input type="checkbox" id="2020/09" v-on:click="toggle('2020/09')">
-        <label for="2020/09">2020/09</label>
-      </input>
+      <div v-for="month in months">
+        <input type="checkbox" :id="month" v-on:click="toggle(month)">
+          <label :for="month">{{month}}</label>
+        </input>
+      </div>
       <LineChart v-bind:chartData="datacollection"></LineChart>
     </div>
     <div v-else>
@@ -57,6 +53,11 @@ export default {
         labels: this.dates,
         datasets: new_datasets,
       }
+    }
+  },
+  computed: {
+    months: function() {
+      return this.all_datasets.map(x => x.label)
     }
   },
   created() {
