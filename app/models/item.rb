@@ -11,8 +11,10 @@ class Item < ApplicationRecord
   def self.amount_with_date(date:)
     total_amount_until_date = 0
     dates = (date.beginning_of_month..date.end_of_month).to_a
+    amount_with_date = where(payed_on: dates).group(:payed_on).sum(:amount)
     amount_by_day = dates.map do |date|
-      total_amount_until_date += where(payed_on: date).sum(:amount)
+      amount = amount_with_date[date] || 0
+      total_amount_until_date += amount
       total_amount_until_date
     end
     color =
