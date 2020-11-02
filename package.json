@@ -8,16 +8,18 @@
     "@rails/webpacker": "4.2.2",
     "chart.js": "^2.9.3",
     "chartkick": "^3.2.1",
-    "css-loader": "^5.0.0",
     "turbolinks": "^5.2.0",
     "vue": "^2.6.12",
     "vue-chartjs": "^3.5.1",
     "vue-loader": "^15.9.3",
-    "vue-template-compiler": "^2.6.12",
-    "webpack": "^4.0"
+    "vue-template-compiler": "^2.6.12"
   },
   "version": "0.1.0",
   "devDependencies": {
     "webpack-dev-server": "^3.11.0"
+  },
+  "peerDependencies": {
+    "css-loader": "^5.0.0",
+    "webpack": "^4.0"
   }
 }
