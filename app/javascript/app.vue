@@ -40,16 +40,15 @@ export default {
   },
   methods: {
     toggle(year_month) {
-      const datasets = this.datacollection.datasets
-      const dataset = datasets.find(x => x.label === year_month)
+      const displayed_datasets = this.datacollection.datasets
+      const checked_dataset = this.all_datasets.find(x => x.label === year_month)
       let new_datasets = []
-      const new_dataset = this.all_datasets.find(x => x.label === year_month)
 
-      if (dataset === undefined) {
-        new_datasets = datasets.concat()
-        new_datasets.push(new_dataset)
+      if (displayed_datasets.includes(checked_dataset)) {
+        new_datasets = displayed_datasets.filter(x => x !== checked_dataset)
       } else {
-        new_datasets = datasets.filter(x => x !== new_dataset)
+        new_datasets = displayed_datasets.concat()
+        new_datasets.push(checked_dataset)
       }
 
       this.datacollection = {
