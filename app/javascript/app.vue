@@ -1,9 +1,9 @@
 <template>
   <div>
     <div v-if="loaded">
-      <div v-for="month in months">
-        <input type="checkbox" :id="month" v-on:click="toggle(month)">
-          <label :for="month">{{month}}</label>
+      <div v-for="year_month in year_months">
+        <input type="checkbox" :id="year_month" v-on:click="toggle(year_month)">
+          <label :for="year_month">{{year_month}}</label>
         </input>
       </div>
       <LineChart v-bind:chartData="datacollection"></LineChart>
@@ -39,11 +39,11 @@ export default {
     }
   },
   methods: {
-    toggle(month) {
+    toggle(year_month) {
       const datasets = this.datacollection.datasets
-      const dataset = datasets.find(x => x.label === month)
+      const dataset = datasets.find(x => x.label === year_month)
       let new_datasets = []
-      const new_dataset = this.all_datasets.find(x => x.label === month)
+      const new_dataset = this.all_datasets.find(x => x.label === year_month)
 
       if (dataset === undefined) {
         new_datasets = datasets.concat()
@@ -59,7 +59,7 @@ export default {
     }
   },
   computed: {
-    months: function() {
+    year_months: function() {
       return this.all_datasets.map(x => x.label)
     }
   },
