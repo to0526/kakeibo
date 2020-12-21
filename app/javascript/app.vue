@@ -1,9 +1,9 @@
 <template>
   <div>
     <div v-if="loaded">
-      <div v-for="month in months">
-        <input type="checkbox" :id="month" v-on:click="toggle(month)">
-          <label :for="month">{{month}}</label>
+      <div v-for="year_month in year_months">
+        <input type="checkbox" :id="year_month" v-on:click="toggle(year_month)">
+          <label :for="year_month">{{year_month}}</label>
         </input>
       </div>
       <LineChart v-bind:chartData="datacollection"></LineChart>
@@ -18,7 +18,10 @@
 <script>
 import LineChart from "./LineChart"
 
-const dates = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+let dates = []
+for (let i = 1; i <= 31; i++) {
+  dates.push(i)
+}
 
 export default {
   components: {
@@ -36,17 +39,16 @@ export default {
     }
   },
   methods: {
-    toggle(month) {
-      const datasets = this.datacollection.datasets
-      const dataset = datasets.find(x => x.label === month)
+    toggle(year_month) {
+      const displayed_datasets = this.datacollection.datasets
+      const checked_dataset = this.all_datasets.find(x => x.label === year_month)
       let new_datasets = []
-      const new_dataset = this.all_datasets.find(x => x.label === month)
 
-      if (dataset === undefined) {
-        new_datasets = datasets.concat()
-        new_datasets.push(new_dataset)
+      if (displayed_datasets.includes(checked_dataset)) {
+        new_datasets = displayed_datasets.filter(x => x !== checked_dataset)
       } else {
-        new_datasets = datasets.filter(x => x !== new_dataset)
+        new_datasets = displayed_datasets.concat()
+        new_datasets.push(checked_dataset)
       }
 
       this.datacollection = {
@@ -56,7 +58,7 @@ export default {
     }
   },
   computed: {
-    months: function() {
+    year_months: function() {
       return this.all_datasets.map(x => x.label)
     }
   },
