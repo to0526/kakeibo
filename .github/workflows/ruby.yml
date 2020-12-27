@@ -15,9 +15,7 @@ on:
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: setup
@@ -28,3 +26,7 @@ jobs:
         docker-compose exec -T app bin/webpack
     - name: Run tests
       run: docker-compose exec -T app bundle exec rspec
+    - name: Coveralls
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
