@@ -310,7 +310,6 @@ DEPENDENCIES
   rspec-rails (~> 4.0.1)
   sass-rails (>= 6)
   selenium-webdriver
-  simplecov
   sorcery
   spring
   spring-watcher-listen (~> 2.0.0)
