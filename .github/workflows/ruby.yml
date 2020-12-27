@@ -25,7 +25,12 @@ jobs:
         docker-compose exec -T app bin/yarn
         docker-compose exec -T app bin/webpack
     - name: Run tests
-      run: docker-compose exec -T app bundle exec rspec
+      run: |
+        docker-compose exec -T app bundle exec rspec
+        echo "docker-compose exec -T app ls"
+        docker-compose exec -T app ls
+        echo "ls"
+        ls
     - name: Coveralls
       uses: coverallsapp/github-action@master
       with:
