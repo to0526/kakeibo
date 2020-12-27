@@ -27,4 +27,4 @@ jobs:
         docker-compose exec -T app bin/yarn
         docker-compose exec -T app bin/webpack
     - name: Run tests
-      run: COVERALLS_REPO_TOKEN=ldFsZcMtlRGS2j2JBDwS2f9dq9VuhVsgt docker-compose exec -T app bundle exec rspec
+      run: docker-compose exec -T app bundle exec rspec
