@@ -23,7 +23,7 @@ development:
 test:
   <<: *default
   database: kakeibo_test
-  host: db
+  host: <%= ENV["POSTGRES_HOST"] || "db" %>
 
 production:
   database: kakeibo_production

@@ -5,26 +5,49 @@
 # This workflow will download a prebuilt Ruby version, install dependencies and run tests with Rake
 # For more information see: https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
 
-name: Ruby
+name: Rails Unit Tests
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: [push, pull_request]
 
 jobs:
-  test:
+  build:
 
     runs-on: ubuntu-latest
 
+    services:
+      db:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: password
+          POSTGRES_USER: kakeibo
+          POSTGRES_DB: kakeibo_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
     steps:
     - uses: actions/checkout@v2
-    - name: setup
+    - name: Set up Ruby 2.7
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.7
+    - name: Build and test with Rake
+      env:
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5432
+        POSTGRES_USER: kakeibo
+        POSTGRES_PASSWORD: password
+        RAILS_ENV: test
       run: |
-        docker-compose up -d
-        docker-compose exec -T app bin/rails db:create db:migrate
-        docker-compose exec -T app bin/yarn
-        docker-compose exec -T app bin/webpack
-    - name: Run tests
-      run: docker-compose exec -T app bundle exec rspec
+        sudo apt-get -yqq install libpq-dev
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+        bin/yarn
+        bin/webpack
+        bundle exec rails db:create
+        bundle exec rails db:migrate
+        bundle exec rspec
