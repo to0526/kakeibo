@@ -1,5 +1,7 @@
 # README
 
+[![Coverage Status](https://coveralls.io/repos/github/to0526/kakeibo/badge.svg)](https://coveralls.io/github/to0526/kakeibo)
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
