@@ -27,10 +27,10 @@ jobs:
     - name: Run tests
       run: |
         docker-compose exec -T app bundle exec rspec
-        echo "docker-compose exec -T app ls"
-        docker-compose exec -T app ls
-        echo "ls"
-        ls
+        echo "[docker-compose exec -T app ls]"
+        docker-compose exec -T app ls coverage
+        echo "[ls]"
+        ls coverage
     - name: Coveralls
       uses: coverallsapp/github-action@master
       with:
