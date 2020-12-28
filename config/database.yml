@@ -11,11 +11,11 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   port: 5432
   password: password
+  host: localhost
 
 development:
   <<: *default
   database: kakeibo_development
-  host: db
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -23,7 +23,6 @@ development:
 test:
   <<: *default
   database: kakeibo_test
-  host: db
 
 production:
   database: kakeibo_production
