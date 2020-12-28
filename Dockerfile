@@ -1,4 +1,4 @@
-From ruby:2.7.2-alpine3.12
+From ruby:3.0.0-alpine3.12
 RUN apk add build-base postgresql-dev yarn
 RUN mkdir /app
 WORKDIR /app
