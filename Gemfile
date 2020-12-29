@@ -50,6 +50,7 @@ group :test do
   gem 'webdrivers'
   gem 'factory_bot_rails'
   gem "coveralls_reborn", "~> 0.19.0", require: false
+  gem "rexml"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
