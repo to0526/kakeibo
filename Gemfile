@@ -47,7 +47,7 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
+  gem 'webdrivers', require: false
   gem 'factory_bot_rails'
   gem "coveralls_reborn", "~> 0.19.0", require: false
 end
