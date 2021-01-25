@@ -248,7 +248,7 @@ GEM
       sync
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    tzinfo-data (1.2020.6)
+    tzinfo-data (1.2021.1)
       tzinfo (>= 1.0.0)
     uniform_notifier (1.13.2)
     web-console (4.1.0)
