@@ -13,5 +13,19 @@ module Types
     def test_field
       "Hello World!"
     end
+
+    field :line_chart_items, [LineChart::ItemType], null: true do
+      argument :labels, [String], required: true
+    end
+
+    def line_chart_items(labels:)
+      [
+        {
+          label: "2020/01",
+          background_color: "#123456",
+          data: [1,2,3],
+        }
+      ]
+    end
   end
 end
