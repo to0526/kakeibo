@@ -19,13 +19,9 @@ module Types
     end
 
     def line_chart_items(labels:)
-      [
-        {
-          label: "2020/01",
-          background_color: "#123456",
-          data: [1,2,3],
-        }
-      ]
+      labels.map do |label|
+        ::LineChart::Item.new(label: label).to_json
+      end
     end
   end
 end

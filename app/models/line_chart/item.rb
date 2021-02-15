@@ -2,8 +2,17 @@ module LineChart
   class Item
     attr_reader :label
 
-    def initialize(label)
+    def initialize(label:)
       @label = label
+    end
+
+    def to_json
+      {
+        label: label,
+        background_color: background_color,
+        data: data,
+        fill: false
+      }
     end
 
     def background_color
