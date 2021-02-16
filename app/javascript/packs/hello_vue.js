@@ -34,10 +34,21 @@
 
 import Vue from 'vue/dist/vue.esm'
 import App from '../app.vue'
+import ApolloClient from 'apollo-boost'
+import VueApollo from 'vue-apollo'
+
+const apolloClient = new ApolloClient({
+  uri: '/graphql'
+})
+Vue.use(VueApollo)
+const apolloProvider = new VueApollo({
+  defaultClient: apolloClient,
+})
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
     el: '#hello',
+    apolloProvider,
     components: { App }
   })
 })

@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{lineChartItems}}
     <div v-if="loaded">
       <div v-for="year_month in year_months">
         <input type="checkbox" :id="year_month" v-on:click="toggle(year_month)">
@@ -17,6 +18,7 @@
 
 <script>
 import LineChart from "./LineChart"
+import gql from "graphql-tag"
 
 let dates = []
 for (let i = 1; i <= 31; i++) {
@@ -68,6 +70,21 @@ export default {
       .then(data => this.all_datasets = data)
       .catch(e => alert(e))
     this.loaded = true
+  },
+  apollo: {
+    lineChartItems: {
+      query: gql`query($labels: [String!]!) {
+        lineChartItems(labels: $labels) {
+          backgroundColor
+          label
+          data
+          fill
+        }
+      }`,
+      variables: {
+        labels: ["2021/01", "2021/02"]
+      }
+    }
   }
 }
 </script>
