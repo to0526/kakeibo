@@ -23,5 +23,36 @@ module Types
         ::LineChart::Item.new(label: label).to_json
       end
     end
+
+    field :datacollection, DatacollectionType, null: true
+
+    def datacollection
+      {
+        labels: (1..31).to_a,
+        datasets: [
+          {
+            background_color: "#E60012",
+            label: "2021/01",
+            data: [
+              "0", "0", "0", "0", "0", "0", "0", "0", "0", "0",
+              "0", "0", "0", "0", "0", "0", "0", "0", "0", "0",
+              "0", "0", "0", "0", "0", "0", "0", "0", "0", "0",
+              "0"
+            ],
+            fill: false
+          },
+          {
+            background_color: "#E39800",
+            label: "2021/02",
+            data: [
+              "0", "-123", "-123", "-123", "-123", "-123", "-123", "-123", "-123", "-123",
+              "-246", "-369", "-369", "-369", "-369", "19631", "19631", "19631", "19631", "19631",
+              "19631", "19631", "19631", "19631", "19508", "19508", "19508", "19508"
+            ],
+            fill: false
+          }
+        ]
+      }
+    end
   end
 end
