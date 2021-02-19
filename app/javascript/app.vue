@@ -69,8 +69,8 @@ export default {
   },
   apollo: {
     datacollection: {
-      query: gql`query {
-        datacollection {
+      query: gql`query($labels: [String!]!) {
+        datacollection(labels: $labels) {
           labels
           datasets {
             backgroundColor
@@ -79,7 +79,10 @@ export default {
             fill
           }
         }
-      }`
+      }`,
+      variables: {
+        labels: ["2021/01", "2021/02"]
+      }
     }
   }
 }
