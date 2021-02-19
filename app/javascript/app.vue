@@ -73,7 +73,7 @@ export default {
         datacollection(labels: $labels) {
           labels
           datasets {
-            backgroundColor
+            borderColor
             label
             data
             fill

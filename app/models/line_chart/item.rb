@@ -9,13 +9,13 @@ module LineChart
     def to_json
       {
         label: label,
-        background_color: background_color,
+        border_color: border_color,
         data: data,
         fill: false
       }
     end
 
-    def background_color
+    def border_color
       case date.month
       when  1 then "#E60012"
       when  2 then "#E39800"
