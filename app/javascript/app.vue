@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- チェックボックスがリセットされるのと、画面がちらつくのでコメントアウト -->
     <!-- <div v-if="$apollo.loading"> -->
     <!--   loading...                 -->
     <!-- </div>                       -->
@@ -31,7 +32,7 @@ export default {
   data() {
     return {
       datacollection: {},
-      selectableYearMonths: ["2021/01", "2021/02"],
+      selectableYearMonths: [],
       selectedYearMonths: [],
       // dates: dates,
       // all_datasets: [],
@@ -93,6 +94,11 @@ export default {
           labels: this.selectedYearMonths
         }
       }
+    },
+    selectableYearMonths: {
+      query: gql`query {
+        selectableYearMonths
+      }`
     }
   }
 }
