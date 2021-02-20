@@ -25,7 +25,7 @@ module Types
     end
 
     field :datacollection, DatacollectionType, null: true do
-      argument :labels, [String], required: true
+      argument :labels, [String, null: true], required: true
     end
 
     def datacollection(labels:)
