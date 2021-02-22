@@ -2,17 +2,17 @@
   <div>
     <!-- チェックボックスがリセットされるのと、画面がちらつくのでコメントアウト -->
     <!-- <div v-if="$apollo.loading"> -->
-    <!--   loading...                 -->
-    <!-- </div>                       -->
-    <!-- <div v-else>                 -->
-      <div v-for="year_month in selectableYearMonths">
-        <input type="checkbox" :id="year_month" v-on:click="toggle(year_month)">
-          <label :for="year_month">{{year_month}}</label>
-        </input>
-      </div>
-      <LineChart v-bind:chartData="datacollection"></LineChart>
-    <!-- </div> -->
-
+    <section>
+      <b-field grouped group-multiline>
+        <b-checkbox-button v-model="selectedYearMonths"
+          :native-value="yearMonth"
+          v-for="yearMonth in selectableYearMonths">
+          <span>{{yearMonth}}</span>
+        </b-checkbox-button>
+      </b-field>
+    </section>
+    <LineChart v-bind:chartData="datacollection"></LineChart>
+    <b-table :data="data" :columns="columns"></b-table>
   </div>
 </template>
 
@@ -29,6 +29,28 @@ export default {
       datacollection: {},
       selectableYearMonths: [],
       selectedYearMonths: [],
+      data: [],
+      columns: [
+        {
+          field: "yearMonth",
+          label: "年月",
+        },
+        {
+          field: "income",
+          label: "収入",
+          numeric: true
+        },
+        {
+          field: "payment",
+          label: "支出",
+          numeric: true
+        },
+        {
+          field: "total",
+          label: "合計",
+          numeric: true
+        },
+      ]
     }
   },
   methods: {
@@ -64,6 +86,21 @@ export default {
       query: gql`query {
         selectableYearMonths
       }`
+    },
+    data: {
+      query: gql`query($labels: [String]!) {
+        data(labels: $labels) {
+          yearMonth
+          income
+          payment
+          total
+        }
+      }`,
+      variables() {
+        return {
+          labels: this.selectedYearMonths
+        }
+      }
     }
   }
 }

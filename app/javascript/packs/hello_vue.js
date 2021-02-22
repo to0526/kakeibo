@@ -36,6 +36,8 @@ import Vue from 'vue/dist/vue.esm'
 import App from '../app.vue'
 import ApolloClient from 'apollo-boost'
 import VueApollo from 'vue-apollo'
+import Buefy from 'buefy'
+import 'buefy/dist/buefy.css'
 
 const apolloClient = new ApolloClient({
   uri: '/graphql'
@@ -44,6 +46,7 @@ Vue.use(VueApollo)
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient,
 })
+Vue.use(Buefy)
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
