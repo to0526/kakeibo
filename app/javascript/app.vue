@@ -2,17 +2,16 @@
   <div>
     <!-- チェックボックスがリセットされるのと、画面がちらつくのでコメントアウト -->
     <!-- <div v-if="$apollo.loading"> -->
-    <!--   loading...                 -->
-    <!-- </div>                       -->
-    <!-- <div v-else>                 -->
-      <div v-for="year_month in selectableYearMonths">
-        <input type="checkbox" :id="year_month" v-on:click="toggle(year_month)">
-          <label :for="year_month">{{year_month}}</label>
-        </input>
-      </div>
-      <LineChart v-bind:chartData="datacollection"></LineChart>
-    <!-- </div> -->
-
+    <section>
+      <b-field grouped group-multiline>
+        <b-checkbox-button v-model="selectedYearMonths"
+          :native-value="yearMonth"
+          v-for="yearMonth in selectableYearMonths">
+          <span>{{yearMonth}}</span>
+        </b-checkbox-button>
+      </b-field>
+    </section>
+    <LineChart v-bind:chartData="datacollection"></LineChart>
   </div>
 </template>
 
