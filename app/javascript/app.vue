@@ -12,6 +12,7 @@
       </b-field>
     </section>
     <LineChart v-bind:chartData="datacollection"></LineChart>
+    <b-table :data="data" :columns="columns"></b-table>
   </div>
 </template>
 
@@ -28,6 +29,28 @@ export default {
       datacollection: {},
       selectableYearMonths: [],
       selectedYearMonths: [],
+      data: [],
+      columns: [
+        {
+          field: "yearMonth",
+          label: "年月",
+        },
+        {
+          field: "income",
+          label: "収入",
+          numeric: true
+        },
+        {
+          field: "payment",
+          label: "支出",
+          numeric: true
+        },
+        {
+          field: "total",
+          label: "合計",
+          numeric: true
+        },
+      ]
     }
   },
   methods: {
@@ -51,11 +74,6 @@ export default {
             data
             fill
           }
-          data {
-            income
-            payment
-            total
-          }
         }
       }`,
       variables() {
@@ -68,6 +86,21 @@ export default {
       query: gql`query {
         selectableYearMonths
       }`
+    },
+    data: {
+      query: gql`query($labels: [String]!) {
+        data(labels: $labels) {
+          yearMonth
+          income
+          payment
+          total
+        }
+      }`,
+      variables() {
+        return {
+          labels: this.selectedYearMonths
+        }
+      }
     }
   }
 }

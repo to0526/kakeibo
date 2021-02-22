@@ -1,7 +1,8 @@
 module Types
   class DataType < Types::BaseObject
-    field :income, Int, null: false
-    field :payment, Int, null: false
-    field :total, Int, null: false
+    field :year_month, String, null: false
+    field :income, String, null: false
+    field :payment, String, null: false
+    field :total, String, null: false
   end
 end

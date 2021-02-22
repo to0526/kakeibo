@@ -8,9 +8,10 @@ module LineChart
 
     def to_json
       {
-        income: income,
-        payment: payment,
-        total: total
+        year_month: label,
+        income: income.to_s(:delimited),
+        payment: payment.to_s(:delimited),
+        total: total.to_s(:delimited)
       }
     end
 
@@ -20,13 +21,13 @@ module LineChart
 
     def payment
       @payment ||= ::Payment.where(payed_on: dates).sum(:amount)
-    end                     
-                            
+    end
+
     def total
       income + payment
     end
 
-    def date                
+    def date
       Time.zone.parse(label).to_date
     end
 

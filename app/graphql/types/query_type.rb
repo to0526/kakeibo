@@ -15,7 +15,6 @@ module Types
       {
         labels: (1..31).to_a,
         datasets: labels.map { |label| ::LineChart::Item.new(label: label).to_json },
-        data: labels.map { |label| ::LineChart::Table.new(label: label).to_json },
       }
     end
 
@@ -24,6 +23,14 @@ module Types
     def selectable_year_months
       dates = (Date.new(2020,07,01)..Date.today.beginning_of_month).to_a
       dates.select { |d| d.day == 1 }.map { |d| d.strftime("%Y/%m") }
+    end
+
+    field :data, [DataType], null: true do
+      argument :labels, [String, null: true], required: true
+    end
+
+    def data(labels:)
+      labels.map { |label| ::LineChart::Table.new(label: label).to_json }
     end
   end
 end
