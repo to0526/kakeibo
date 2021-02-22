@@ -51,6 +51,11 @@ export default {
             data
             fill
           }
+          data {
+            income
+            payment
+            total
+          }
         }
       }`,
       variables() {

@@ -14,7 +14,8 @@ module Types
     def datacollection(labels:)
       {
         labels: (1..31).to_a,
-        datasets: labels.map { |label| ::LineChart::Item.new(label: label).to_json }
+        datasets: labels.map { |label| ::LineChart::Item.new(label: label).to_json },
+        data: labels.map { |label| ::LineChart::Table.new(label: label).to_json },
       }
     end
 
