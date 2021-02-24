@@ -12,7 +12,20 @@
       </b-field>
     </section>
     <LineChart v-bind:chartData="datacollection"></LineChart>
-    <b-table :data="data" :columns="columns"></b-table>
+    <b-table :data="data">
+      <b-table-column field="yearMonth" label="年月" v-slot="props">
+        {{ props.row.yearMonth }}
+      </b-table-column>
+      <b-table-column field="income" label="収入" numeric v-slot="props">
+        {{ props.row.income }}
+      </b-table-column>
+      <b-table-column field="payment" label="支出" numeric v-slot="props">
+        {{ props.row.payment }}
+      </b-table-column>
+      <b-table-column field="total" label="合計" numeric v-slot="props">
+        {{ props.row.total }}
+      </b-table-column>
+    </b-table>
   </div>
 </template>
 
@@ -30,27 +43,6 @@ export default {
       selectableYearMonths: [],
       selectedYearMonths: [],
       data: [],
-      columns: [
-        {
-          field: "yearMonth",
-          label: "年月",
-        },
-        {
-          field: "income",
-          label: "収入",
-          numeric: true
-        },
-        {
-          field: "payment",
-          label: "支出",
-          numeric: true
-        },
-        {
-          field: "total",
-          label: "合計",
-          numeric: true
-        },
-      ]
     }
   },
   apollo: {
