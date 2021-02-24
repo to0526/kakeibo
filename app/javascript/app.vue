@@ -53,16 +53,6 @@ export default {
       ]
     }
   },
-  methods: {
-    toggle(year_month) {
-      if (this.selectedYearMonths.includes(year_month)) {
-        this.selectedYearMonths = this.selectedYearMonths.filter(x => x !== year_month)
-      } else {
-        this.selectedYearMonths.push(year_month)
-      }
-      this.$apollo.queries.datacollection.refetch()
-    }
-  },
   apollo: {
     datacollection: {
       query: gql`query($labels: [String]!) {
@@ -78,7 +68,7 @@ export default {
       }`,
       variables() {
         return {
-          labels: this.selectedYearMonths
+          labels: [...this.selectedYearMonths].sort()
         }
       }
     },
@@ -98,7 +88,7 @@ export default {
       }`,
       variables() {
         return {
-          labels: this.selectedYearMonths
+          labels: [...this.selectedYearMonths].sort()
         }
       }
     }
