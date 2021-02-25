@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Types::QueryType do
-  describe "datacollection" do
-    subject { KakeiboSchema.execute(query_string, variables: variables) }
+  subject { KakeiboSchema.execute(query_string, variables: variables) }
+
+  describe "#datacollection" do
     before { FactoryBot.create(:item, payed_on: Date.new(2021, 1, 1)) }
     let(:query_string) do
       <<~STR
@@ -31,6 +32,23 @@ RSpec.describe Types::QueryType do
       expect(dataset["borderColor"]).to eq("#E60012")
       expect(dataset["data"]).to eq(["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"])
       expect(dataset["fill"]).to eq(false)
+    end
+  end
+
+  describe "#selectable_year_months" do
+    let(:query_string) do
+      <<~STR
+      query selectableYearMonths {
+        selectableYearMonths
+      }
+      STR
+    end
+    let(:variables) do
+      { }
+    end
+
+    it do
+      expect(subject["data"]["selectableYearMonths"]).to eq(["2020/07", "2020/08", "2020/09", "2020/10", "2020/11", "2020/12", "2021/01", "2021/02"])
     end
   end
 end
