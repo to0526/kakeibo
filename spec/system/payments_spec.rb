@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "Payments", type: :system do
-  let(:user) { FactoryBot.create(:user) }
+  let!(:user) { FactoryBot.create(:user, email: "test@example.com") }
   let!(:payment) { FactoryBot.create(:payment, user: user) }
 
   before do

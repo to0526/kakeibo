@@ -12,7 +12,29 @@
       </b-field>
     </section>
     <LineChart v-bind:chartData="datacollection"></LineChart>
-    <b-table :data="data" :columns="columns"></b-table>
+    <b-table :data="data">
+      <b-table-column field="yearMonth" label="年月" v-slot="props">
+        {{ props.row.yearMonth }}
+      </b-table-column>
+
+      <b-table-column field="income" label="収入" numeric v-slot="props">
+        <span :class="type(props.row.income)">
+          {{ props.row.income }}
+        </span>
+      </b-table-column>
+
+      <b-table-column field="payment" label="支出" numeric v-slot="props">
+        <span :class="type(props.row.payment)">
+          {{ props.row.payment }}
+        </span>
+      </b-table-column>
+
+      <b-table-column field="total" label="合計" numeric v-slot="props">
+        <span :class="type(props.row.total)">
+          {{ props.row.total }}
+        </span>
+      </b-table-column>
+    </b-table>
   </div>
 </template>
 
@@ -30,37 +52,6 @@ export default {
       selectableYearMonths: [],
       selectedYearMonths: [],
       data: [],
-      columns: [
-        {
-          field: "yearMonth",
-          label: "年月",
-        },
-        {
-          field: "income",
-          label: "収入",
-          numeric: true
-        },
-        {
-          field: "payment",
-          label: "支出",
-          numeric: true
-        },
-        {
-          field: "total",
-          label: "合計",
-          numeric: true
-        },
-      ]
-    }
-  },
-  methods: {
-    toggle(year_month) {
-      if (this.selectedYearMonths.includes(year_month)) {
-        this.selectedYearMonths = this.selectedYearMonths.filter(x => x !== year_month)
-      } else {
-        this.selectedYearMonths.push(year_month)
-      }
-      this.$apollo.queries.datacollection.refetch()
     }
   },
   apollo: {
@@ -78,7 +69,7 @@ export default {
       }`,
       variables() {
         return {
-          labels: this.selectedYearMonths
+          labels: [...this.selectedYearMonths].sort()
         }
       }
     },
@@ -98,8 +89,17 @@ export default {
       }`,
       variables() {
         return {
-          labels: this.selectedYearMonths
+          labels: [...this.selectedYearMonths].sort()
         }
+      }
+    }
+  },
+  methods: {
+    type: function(value) {
+      if (value.slice(0, 1) == "-") {
+        return 'has-text-danger'
+      } else {
+        return 'has-text-info'
       }
     }
   }

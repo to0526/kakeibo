@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :item do
-    payed_on
-    amount
-    user_id
-    payment_classification_id
-    payment_method_id
+    payed_on { Date.today }
+    amount { 0 }
+    user
+    payment_classification
+    payment_method
     note { "備考" }
     type { "Payment" }
   end

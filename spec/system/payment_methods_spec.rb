@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "PaymentMethods", type: :system do
-  let!(:user) { FactoryBot.create(:user) }
+  let!(:user) { FactoryBot.create(:user, email: "test@example.com") }
 
   before do
     visit login_path

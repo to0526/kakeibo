@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "Income", type: :system do
-  let(:user) { FactoryBot.create(:user) }
+  let!(:user) { FactoryBot.create(:user, email: "test@example.com") }
   let!(:income) { FactoryBot.create(:income, user: user) }
 
   before do
