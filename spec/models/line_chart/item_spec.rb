@@ -1,12 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe LineChart::Item, type: :model do
+  let(:user) { FactoryBot.create(:user) }
+  let(:line_chart_item) { LineChart::Item.new(label: label, user_ids: [user.id]) }
+
   before do
     (1..12).to_a do |month|
-      FactoryBot.create(:item, payed_on: Date.new(2021, month, 1))
+      FactoryBot.create(:item, payed_on: Date.new(2021, month, 1), user: user)
     end
   end
-  let(:line_chart_item) { LineChart::Item.new(label: label) }
 
   describe "#to_json" do
     subject { line_chart_item.to_json }
