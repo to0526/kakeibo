@@ -9,12 +9,13 @@ module Types
 
     field :datacollection, DatacollectionType, null: true do
       argument :labels, [String, null: true], required: true
+      argument :user_ids, [Int, null: true], required: true
     end
 
-    def datacollection(labels:)
+    def datacollection(labels:, user_ids:)
       {
         labels: (1..31).to_a,
-        datasets: labels.map { |label| ::LineChart::Item.new(label: label).to_json },
+        datasets: labels.map { |label| ::LineChart::Item.new(label: label, user_ids: user_ids).to_json },
       }
     end
 

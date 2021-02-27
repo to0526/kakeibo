@@ -160,8 +160,8 @@ export default {
   },
   apollo: {
     datacollection: {
-      query: gql`query($labels: [String]!) {
-        datacollection(labels: $labels) {
+      query: gql`query($labels: [String]!, $userIds: [Int]!) {
+        datacollection(labels: $labels, userIds: $userIds) {
           labels
           datasets {
             borderColor
@@ -173,7 +173,8 @@ export default {
       }`,
       variables() {
         return {
-          labels: [...this.selectedYearMonths].sort()
+          labels: [...this.selectedYearMonths].sort(),
+          userIds: this.selectedUsers.map(u => Number(u.id))
         }
       }
     },
