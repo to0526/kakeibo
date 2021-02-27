@@ -6,7 +6,7 @@
     <div>支払年月</div>
     <div>{{[...selectedYearMonths].sort()}}</div>
     <div>ユーザー</div>
-    <div>{{selectedUsers}}</div>
+    <div>{{selectedUsers.map(u => u.name)}}</div>
 
     <b-modal v-model="isSearchModalActive" has-modal-card>
       <div class="modal-card">
@@ -21,7 +21,7 @@
 
           <b-field label="ユーザー" grouped group-multiline>
             <b-checkbox-button v-model="selectedUsers"
-              :native-value="user.name"
+              :native-value="user"
               v-for="user in users">
               <span>{{user.name}}</span>
             </b-checkbox-button>
