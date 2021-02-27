@@ -1,9 +1,10 @@
 module LineChart
   class Item
-    attr_reader :label
+    attr_reader :label, :user_ids
 
-    def initialize(label:)
+    def initialize(label:, user_ids:)
       @label = label
+      @user_ids = user_ids
     end
 
     def to_json
@@ -34,7 +35,7 @@ module LineChart
 
     def data
       total_amount_until_date = 0
-      amount_with_date = ::Item.where(payed_on: dates).group(:payed_on).sum(:amount)
+      amount_with_date = ::Item.where(payed_on: dates, user_id: user_ids).group(:payed_on).sum(:amount)
       dates.map do |date|   
         amount = amount_with_date[date] || 0
         total_amount_until_date += amount

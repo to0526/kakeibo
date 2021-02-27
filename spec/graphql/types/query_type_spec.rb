@@ -2,13 +2,14 @@ require 'rails_helper'
 
 RSpec.describe Types::QueryType do
   subject { KakeiboSchema.execute(query_string, variables: variables) }
+  let(:user) { FactoryBot.create(:user) }
 
   describe "#datacollection" do
-    before { FactoryBot.create(:item, payed_on: Date.new(2021, 1, 1)) }
+    before { FactoryBot.create(:item, payed_on: Date.new(2021, 1, 1), user: user) }
     let(:query_string) do
       <<~STR
-      query datacollection($labels: [String]!) {
-        datacollection(labels: $labels) {
+      query datacollection($labels: [String]!, $userIds: [Int]!) {
+        datacollection(labels: $labels, userIds: $userIds) {
           labels
           datasets {
             label
@@ -21,7 +22,10 @@ RSpec.describe Types::QueryType do
       STR
     end
     let(:variables) do
-      { labels: ["2020/01"] }
+      {
+        labels: ["2020/01"],
+        userIds: [user.id]
+      }
     end
     let(:datacollection) { subject["data"]["datacollection"] }
     let(:dataset) { datacollection["datasets"][0] }
@@ -81,8 +85,8 @@ RSpec.describe Types::QueryType do
     before { FactoryBot.create(:item, payed_on: Date.new(2021, 1, 1)) }
     let(:query_string) do
       <<~STR
-      query data($labels: [String]!) {
-        data(labels: $labels) {
+      query data($labels: [String]!, $userIds: [Int]!) {
+        data(labels: $labels, userIds: $userIds) {
           yearMonth
           income
           payment
@@ -92,7 +96,10 @@ RSpec.describe Types::QueryType do
       STR
     end
     let(:variables) do
-      { labels: ["2020/01"] }
+      {
+        labels: ["2020/01"],
+        userIds: [user.id]
+      }
     end
 
     it do

@@ -1,11 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe LineChart::Table, type: :model do
+  let(:user) { FactoryBot.create(:user) }
+  let(:line_chart_table) { LineChart::Table.new(label: "2021/02", user_ids: [user.id]) }
   before do
-    FactoryBot.create(:income, payed_on: Date.new(2021, 2, 1), amount: 100_000)
-    FactoryBot.create(:payment, payed_on: Date.new(2021, 2, 1), amount: -10_000)
+    FactoryBot.create(:income, payed_on: Date.new(2021, 2, 1), amount: 100_000, user: user)
+    FactoryBot.create(:payment, payed_on: Date.new(2021, 2, 1), amount: -10_000, user: user)
   end
-  let(:line_chart_table) { LineChart::Table.new(label: "2021/02") }
 
   describe "#to_json" do
     subject { line_chart_table.to_json }
