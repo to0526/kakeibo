@@ -36,6 +36,21 @@
   <% end %>
 </div>
 
+<table>
+  <tr class="blue">
+    <th>収入</th>
+    <td align="right"><%= @incomes_total_amount.to_s(:delimited) %></td>
+  </tr>
+  <tr class="red">
+    <th>支出</th>
+    <td align="right"><%= @payments_total_amount.to_s(:delimited) %></td>
+  </tr>
+  <tr>
+    <th>合計金額</th>
+    <td align="right"><%= (@incomes_total_amount + @payments_total_amount).to_s(:delimited) %></td>
+  </tr>
+</table>
+
 <div id='hello'>
   <app></app>
 </div>
