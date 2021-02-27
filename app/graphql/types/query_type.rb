@@ -32,5 +32,11 @@ module Types
     def data(labels:)
       labels.map { |label| ::LineChart::Table.new(label: label).to_json }
     end
+
+    field :users, [UserType], null: true
+
+    def users
+      User.all
+    end
   end
 end

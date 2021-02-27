@@ -5,7 +5,7 @@
     <b-button label="絞り込み" @click="isSearchModalActive = true" />
     <div>支払年月</div>
     <div>{{[...selectedYearMonths].sort()}}</div>
-    <div>支払年月</div>
+    <div>ユーザー</div>
     <div>{{selectedUsers}}</div>
 
     <b-modal v-model="isSearchModalActive" has-modal-card>
@@ -21,9 +21,9 @@
 
           <b-field label="ユーザー" grouped group-multiline>
             <b-checkbox-button v-model="selectedUsers"
-              :native-value="user"
-              v-for="user in selectableUsers">
-              <span>{{user}}</span>
+              :native-value="user.name"
+              v-for="user in users">
+              <span>{{user.name}}</span>
             </b-checkbox-button>
           </b-field>
 
@@ -150,11 +150,12 @@ export default {
       selectableYearMonths: [],
       selectedYearMonths: [],
       data: [],
-      selectableUsers: ["たかひろ", "まいこ"],
+      users: [],
       selectedUsers: [],
       paymentClassifications: [],
       paymentMethods: [],
-      isSearchModalActive: false
+      isSearchModalActive: false,
+      users: [],
     }
   },
   apollo: {
@@ -195,7 +196,15 @@ export default {
           labels: [...this.selectedYearMonths].sort()
         }
       }
-    }
+    },
+    users: {
+      query: gql`query {
+        users {
+          id
+          name
+        }
+      }`
+    },
   },
   methods: {
     type: function(value) {
