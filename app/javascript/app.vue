@@ -5,6 +5,8 @@
     <b-button label="絞り込み" @click="isSearchModalActive = true" />
     <div>支払年月</div>
     <div>{{[...selectedYearMonths].sort()}}</div>
+    <div>支払年月</div>
+    <div>{{selectedUsers}}</div>
 
     <b-modal v-model="isSearchModalActive" has-modal-card>
       <div class="modal-card">
@@ -18,11 +20,10 @@
           </b-field>
 
           <b-field label="ユーザー" grouped group-multiline>
-            <b-checkbox-button v-model="users" native-value="たかひろ">
-              <span>たかひろ</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="users" native-value="まいこ">
-              <span>まいこ</span>
+            <b-checkbox-button v-model="selectedUsers"
+              :native-value="user"
+              v-for="user in selectableUsers">
+              <span>{{user}}</span>
             </b-checkbox-button>
           </b-field>
 
@@ -149,7 +150,8 @@ export default {
       selectableYearMonths: [],
       selectedYearMonths: [],
       data: [],
-      users: [],
+      selectableUsers: ["たかひろ", "まいこ"],
+      selectedUsers: [],
       paymentClassifications: [],
       paymentMethods: [],
       isSearchModalActive: false
