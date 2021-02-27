@@ -28,10 +28,11 @@ module Types
 
     field :data, [DataType], null: true do
       argument :labels, [String, null: true], required: true
+      argument :user_ids, [Int, null: true], required: true
     end
 
-    def data(labels:)
-      labels.map { |label| ::LineChart::Table.new(label: label).to_json }
+    def data(labels:, user_ids:)
+      labels.map { |label| ::LineChart::Table.new(label: label, user_ids: user_ids).to_json }
     end
 
     field :users, [UserType], null: true

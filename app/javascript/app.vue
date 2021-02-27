@@ -184,8 +184,8 @@ export default {
       }`
     },
     data: {
-      query: gql`query($labels: [String]!) {
-        data(labels: $labels) {
+      query: gql`query($labels: [String]!, $userIds: [Int]!) {
+        data(labels: $labels, userIds: $userIds) {
           yearMonth
           income
           payment
@@ -194,7 +194,8 @@ export default {
       }`,
       variables() {
         return {
-          labels: [...this.selectedYearMonths].sort()
+          labels: [...this.selectedYearMonths].sort(),
+          userIds: this.selectedUsers.map(u => Number(u.id))
         }
       }
     },

@@ -1,9 +1,10 @@
 module LineChart
   class Table
-    attr_reader :label
+    attr_reader :label, :user_ids
 
-    def initialize(label:)
+    def initialize(label:, user_ids:)
       @label = label
+      @user_ids = user_ids
     end
 
     def to_json
@@ -16,11 +17,11 @@ module LineChart
     end
 
     def income
-      @income ||= ::Income.where(payed_on: dates).sum(:amount)
+      @income ||= ::Income.where(payed_on: dates, user_id: user_ids).sum(:amount)
     end
 
     def payment
-      @payment ||= ::Payment.where(payed_on: dates).sum(:amount)
+      @payment ||= ::Payment.where(payed_on: dates, user_id: user_ids).sum(:amount)
     end
 
     def total
