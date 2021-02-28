@@ -46,5 +46,11 @@ module Types
     def payment_classifications
       PaymentClassification.all
     end
+
+    field :payment_methods, [PaymentMethodType], null: true
+
+    def payment_methods
+      PaymentMethod.all
+    end
   end
 end

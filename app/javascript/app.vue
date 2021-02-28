@@ -9,6 +9,8 @@
     <div>{{selectedUsers.map(u => u.name)}}</div>
     <div>収支分類</div>
     <div>{{selectedPaymentClassifications.map(u => u.name)}}</div>
+    <div>収支方法</div>
+    <div>{{selectedPaymentMethods.map(u => u.name)}}</div>
 
     <b-modal v-model="isSearchModalActive" has-modal-card>
       <div class="modal-card">
@@ -21,6 +23,14 @@
             </b-checkbox-button>
           </b-field>
 
+          <b-field label="ユーザー" grouped group-multiline>
+            <b-checkbox-button v-model="selectedUsers"
+              :native-value="user"
+              v-for="user in users">
+              <span>{{user.name}}</span>
+            </b-checkbox-button>
+          </b-field>
+
           <b-field label="収支分類" grouped group-multiline>
             <b-checkbox-button v-model="selectedPaymentClassifications"
               :native-value="paymentClassification"
@@ -30,41 +40,10 @@
           </b-field>
 
           <b-field label="収支方法" grouped group-multiline>
-            <b-checkbox-button v-model="paymentClassifications" native-value="現金">
-              <span>現金</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="クレジットカード(楽天)">
-              <span>クレジットカード(楽天)</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="クレジットカード(SEIYU)">
-              <span>クレジットカード(SEIYU)</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="クレジットカード(ヨドバシ)">
-              <span>クレジットカード(ヨドバシ)</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="クレジットカード(VISA)">
-              <span>クレジットカード(VISA)</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="iD">
-              <span>iD</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="SUICA">
-              <span>SUICA</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="クレジットカード(JR東海エクスプレス)">
-              <span>クレジットカード(JR東海エクスプレス)</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="引き落とし(三井住友)">
-              <span>引き落とし(三井住友)</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="クレジットカード(三井住友)">
-              <span>クレジットカード(三井住友)</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="銀行振込">
-              <span>銀行振込</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="クレジットカード(dカードGOLD)">
-              <span>クレジットカード(dカードGOLD)</span>
+            <b-checkbox-button v-model="selectedPaymentMethods"
+              :native-value="paymentMethod"
+              v-for="paymentMethod in paymentMethods">
+              <span>{{paymentMethod.name}}</span>
             </b-checkbox-button>
           </b-field>
         </section>
@@ -118,6 +97,7 @@ export default {
       paymentClassifications: [],
       selectedPaymentClassifications: [],
       paymentMethods: [],
+      selectedPaymentMethods: [],
       isSearchModalActive: false,
       users: [],
     }
@@ -174,6 +154,14 @@ export default {
     paymentClassifications: {
       query: gql`query {
         paymentClassifications {
+          id
+          name
+        }
+      }`
+    },
+    paymentMethods: {
+      query: gql`query {
+        paymentMethods {
           id
           name
         }
