@@ -10,12 +10,22 @@ module Types
     field :datacollection, DatacollectionType, null: true do
       argument :labels, [String, null: true], required: true
       argument :user_ids, [Int, null: true], required: true
+      argument :payment_classification_ids, [Int, null: true], required: true
+      argument :payment_method_ids, [Int, null: true], required: true
     end
 
-    def datacollection(labels:, user_ids:)
+    def datacollection(labels:, user_ids:, payment_classification_ids:, payment_method_ids:)
       {
         labels: (1..31).to_a,
-        datasets: labels.map { |label| ::LineChart::Item.new(label: label, user_ids: user_ids).to_json },
+        datasets: labels.map do |label|
+          args = {
+            label: label,
+            user_ids: user_ids,
+            payment_classification_ids: payment_classification_ids,
+            payment_method_ids: payment_method_ids
+          }
+          ::LineChart::Item.new(args).to_json
+        end
       }
     end
 
@@ -29,10 +39,20 @@ module Types
     field :data, [DataType], null: true do
       argument :labels, [String, null: true], required: true
       argument :user_ids, [Int, null: true], required: true
+      argument :payment_classification_ids, [Int, null: true], required: true
+      argument :payment_method_ids, [Int, null: true], required: true
     end
 
-    def data(labels:, user_ids:)
-      labels.map { |label| ::LineChart::Table.new(label: label, user_ids: user_ids).to_json }
+    def data(labels:, user_ids:, payment_classification_ids:, payment_method_ids:)
+      labels.map do |label|
+        args = {
+          label: label,
+          user_ids: user_ids,
+          payment_classification_ids: payment_classification_ids,
+          payment_method_ids: payment_method_ids
+        }
+        ::LineChart::Table.new(args).to_json
+      end
     end
 
     field :users, [UserType], null: true

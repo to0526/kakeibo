@@ -1,10 +1,12 @@
 module LineChart
   class Item
-    attr_reader :label, :user_ids
+    attr_reader :label, :user_ids, :payment_classification_ids, :payment_method_ids
 
-    def initialize(label:, user_ids:)
+    def initialize(label:, user_ids:, payment_classification_ids:, payment_method_ids:)
       @label = label
       @user_ids = user_ids
+      @payment_classification_ids = payment_classification_ids
+      @payment_method_ids = payment_method_ids
     end
 
     def to_json
@@ -15,6 +17,8 @@ module LineChart
         fill: false
       }
     end
+
+    private
 
     def border_color
       case date.month
@@ -35,7 +39,13 @@ module LineChart
 
     def data
       total_amount_until_date = 0
-      amount_with_date = ::Item.where(payed_on: dates, user_id: user_ids).group(:payed_on).sum(:amount)
+      args = {
+        payed_on: dates,
+        user_id: user_ids,
+        payment_classification_id: payment_classification_ids,
+        payment_method_id: payment_method_ids,
+      }
+      amount_with_date = ::Item.where(args).group(:payed_on).sum(:amount)
       dates.map do |date|   
         amount = amount_with_date[date] || 0
         total_amount_until_date += amount

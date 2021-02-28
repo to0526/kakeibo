@@ -104,8 +104,8 @@ export default {
   },
   apollo: {
     datacollection: {
-      query: gql`query($labels: [String]!, $userIds: [Int]!) {
-        datacollection(labels: $labels, userIds: $userIds) {
+      query: gql`query($labels: [String]!, $userIds: [Int]!, $paymentClassificationIds: [Int]!, $paymentMethodIds: [Int]!) {
+        datacollection(labels: $labels, userIds: $userIds, paymentClassificationIds: $paymentClassificationIds, paymentMethodIds: $paymentMethodIds) {
           labels
           datasets {
             borderColor
@@ -118,7 +118,9 @@ export default {
       variables() {
         return {
           labels: [...this.selectedYearMonths].sort(),
-          userIds: this.selectedUsers.map(u => Number(u.id))
+          userIds: this.selectedUsers.map(u => Number(u.id)),
+          paymentClassificationIds: this.selectedPaymentClassifications.map(u => Number(u.id)),
+          paymentMethodIds: this.selectedPaymentMethods.map(u => Number(u.id)),
         }
       }
     },
@@ -128,8 +130,8 @@ export default {
       }`
     },
     data: {
-      query: gql`query($labels: [String]!, $userIds: [Int]!) {
-        data(labels: $labels, userIds: $userIds) {
+      query: gql`query($labels: [String]!, $userIds: [Int]!, $paymentClassificationIds: [Int]!, $paymentMethodIds: [Int]!) {
+        data(labels: $labels, userIds: $userIds, paymentClassificationIds: $paymentClassificationIds, paymentMethodIds: $paymentMethodIds) {
           yearMonth
           income
           payment
@@ -139,7 +141,9 @@ export default {
       variables() {
         return {
           labels: [...this.selectedYearMonths].sort(),
-          userIds: this.selectedUsers.map(u => Number(u.id))
+          userIds: this.selectedUsers.map(u => Number(u.id)),
+          paymentClassificationIds: this.selectedPaymentClassifications.map(u => Number(u.id)),
+          paymentMethodIds: this.selectedPaymentMethods.map(u => Number(u.id)),
         }
       }
     },
