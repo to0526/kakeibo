@@ -15,6 +15,8 @@
     <b-modal v-model="isSearchModalActive" has-modal-card>
       <div class="modal-card">
         <section class="modal-card-body">
+          <b-checkbox v-model="checkAll">すべてチェック</b-checkbox>
+
           <b-field label="支払日" grouped group-multiline>
             <b-checkbox-button v-model="selectedYearMonths"
               :native-value="yearMonth"
@@ -100,6 +102,7 @@ export default {
       selectedPaymentMethods: [],
       isSearchModalActive: false,
       users: [],
+      checkAll: false,
     }
   },
   apollo: {
@@ -179,8 +182,23 @@ export default {
       } else {
         return 'has-text-info'
       }
-    }
-  }
+    },
+  },
+  watch: {
+    checkAll: function(val) {
+      if (val == true) {
+        this.selectedUsers = this.users
+        this.selectedYearMonths = this.selectableYearMonths
+        this.selectedPaymentClassifications = this.paymentClassifications
+        this.selectedPaymentMethods = this.paymentMethods
+      } else {
+        this.selectedUsers = []
+        this.selectedYearMonths = []
+        this.selectedPaymentClassifications = []
+        this.selectedPaymentMethods = []
+      }
+    },
+  },
 }
 </script>
 
