@@ -3,13 +3,23 @@ require 'rails_helper'
 RSpec.describe Types::QueryType do
   subject { KakeiboSchema.execute(query_string, variables: variables) }
   let(:user) { FactoryBot.create(:user) }
+  let(:payment_classification) { FactoryBot.create(:payment_classification) }
+  let(:payment_method) { FactoryBot.create(:payment_method) }
+  before do
+    FactoryBot.create(
+      :item,
+      payed_on: Date.new(2021, 1, 1),
+      user: user,
+      payment_classification: payment_classification,
+      payment_method: payment_method
+    )
+  end
 
   describe "#datacollection" do
-    before { FactoryBot.create(:item, payed_on: Date.new(2021, 1, 1), user: user) }
     let(:query_string) do
       <<~STR
-      query datacollection($labels: [String]!, $userIds: [Int]!) {
-        datacollection(labels: $labels, userIds: $userIds) {
+      query datacollection($labels: [String]!, $userIds: [Int]!, $paymentClassificationIds: [Int]!, $paymentMethodIds: [Int]!) {
+        datacollection(labels: $labels, userIds: $userIds, paymentClassificationIds: $paymentClassificationIds, paymentMethodIds: $paymentMethodIds) {
           labels
           datasets {
             label
@@ -24,7 +34,9 @@ RSpec.describe Types::QueryType do
     let(:variables) do
       {
         labels: ["2020/01"],
-        userIds: [user.id]
+        userIds: [user.id],
+        paymentClassificationIds: [payment_classification.id],
+        paymentMethodIds: [payment_method.id]
       }
     end
     let(:datacollection) { subject["data"]["datacollection"] }
@@ -82,11 +94,10 @@ RSpec.describe Types::QueryType do
   end
 
   describe "#data" do
-    before { FactoryBot.create(:item, payed_on: Date.new(2021, 1, 1)) }
     let(:query_string) do
       <<~STR
-      query data($labels: [String]!, $userIds: [Int]!) {
-        data(labels: $labels, userIds: $userIds) {
+      query data($labels: [String]!, $userIds: [Int]!, $paymentClassificationIds: [Int]!, $paymentMethodIds: [Int]!) {
+        data(labels: $labels, userIds: $userIds, paymentClassificationIds: $paymentClassificationIds, paymentMethodIds: $paymentMethodIds) {
           yearMonth
           income
           payment
@@ -98,7 +109,9 @@ RSpec.describe Types::QueryType do
     let(:variables) do
       {
         labels: ["2020/01"],
-        userIds: [user.id]
+        userIds: [user.id],
+        paymentClassificationIds: [payment_classification.id],
+        paymentMethodIds: [payment_method.id]
       }
     end
 

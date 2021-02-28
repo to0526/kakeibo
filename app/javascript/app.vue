@@ -7,6 +7,10 @@
     <div>{{[...selectedYearMonths].sort()}}</div>
     <div>ユーザー</div>
     <div>{{selectedUsers.map(u => u.name)}}</div>
+    <div>収支分類</div>
+    <div>{{selectedPaymentClassifications.map(u => u.name)}}</div>
+    <div>収支方法</div>
+    <div>{{selectedPaymentMethods.map(u => u.name)}}</div>
 
     <b-modal v-model="isSearchModalActive" has-modal-card>
       <div class="modal-card">
@@ -28,80 +32,18 @@
           </b-field>
 
           <b-field label="収支分類" grouped group-multiline>
-            <b-checkbox-button v-model="paymentClassifications" native-value="食費">
-              <span>食費</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="外食">
-              <span>外食</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="水道光熱費">
-              <span>水道光熱費</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="通信費">
-              <span>通信費</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="日用品">
-              <span>日用品</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="一般保険料">
-              <span>一般保険料</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="娯楽費">
-              <span>娯楽費</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="コンビニで買ったおやつ">
-              <span>コンビニで買ったおやつ</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="本、雑誌">
-              <span>本、雑誌</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="服・美容">
-              <span>服・美容</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="ペット">
-              <span>ペット</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="交通費">
-              <span>交通費</span>
+            <b-checkbox-button v-model="selectedPaymentClassifications"
+              :native-value="paymentClassification"
+              v-for="paymentClassification in paymentClassifications">
+              <span>{{paymentClassification.name}}</span>
             </b-checkbox-button>
           </b-field>
 
           <b-field label="収支方法" grouped group-multiline>
-            <b-checkbox-button v-model="paymentClassifications" native-value="現金">
-              <span>現金</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="クレジットカード(楽天)">
-              <span>クレジットカード(楽天)</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="クレジットカード(SEIYU)">
-              <span>クレジットカード(SEIYU)</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="クレジットカード(ヨドバシ)">
-              <span>クレジットカード(ヨドバシ)</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="クレジットカード(VISA)">
-              <span>クレジットカード(VISA)</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="iD">
-              <span>iD</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="SUICA">
-              <span>SUICA</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="クレジットカード(JR東海エクスプレス)">
-              <span>クレジットカード(JR東海エクスプレス)</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="引き落とし(三井住友)">
-              <span>引き落とし(三井住友)</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="クレジットカード(三井住友)">
-              <span>クレジットカード(三井住友)</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="銀行振込">
-              <span>銀行振込</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="クレジットカード(dカードGOLD)">
-              <span>クレジットカード(dカードGOLD)</span>
+            <b-checkbox-button v-model="selectedPaymentMethods"
+              :native-value="paymentMethod"
+              v-for="paymentMethod in paymentMethods">
+              <span>{{paymentMethod.name}}</span>
             </b-checkbox-button>
           </b-field>
         </section>
@@ -153,15 +95,17 @@ export default {
       users: [],
       selectedUsers: [],
       paymentClassifications: [],
+      selectedPaymentClassifications: [],
       paymentMethods: [],
+      selectedPaymentMethods: [],
       isSearchModalActive: false,
       users: [],
     }
   },
   apollo: {
     datacollection: {
-      query: gql`query($labels: [String]!, $userIds: [Int]!) {
-        datacollection(labels: $labels, userIds: $userIds) {
+      query: gql`query($labels: [String]!, $userIds: [Int]!, $paymentClassificationIds: [Int]!, $paymentMethodIds: [Int]!) {
+        datacollection(labels: $labels, userIds: $userIds, paymentClassificationIds: $paymentClassificationIds, paymentMethodIds: $paymentMethodIds) {
           labels
           datasets {
             borderColor
@@ -174,7 +118,9 @@ export default {
       variables() {
         return {
           labels: [...this.selectedYearMonths].sort(),
-          userIds: this.selectedUsers.map(u => Number(u.id))
+          userIds: this.selectedUsers.map(u => Number(u.id)),
+          paymentClassificationIds: this.selectedPaymentClassifications.map(u => Number(u.id)),
+          paymentMethodIds: this.selectedPaymentMethods.map(u => Number(u.id)),
         }
       }
     },
@@ -184,8 +130,8 @@ export default {
       }`
     },
     data: {
-      query: gql`query($labels: [String]!, $userIds: [Int]!) {
-        data(labels: $labels, userIds: $userIds) {
+      query: gql`query($labels: [String]!, $userIds: [Int]!, $paymentClassificationIds: [Int]!, $paymentMethodIds: [Int]!) {
+        data(labels: $labels, userIds: $userIds, paymentClassificationIds: $paymentClassificationIds, paymentMethodIds: $paymentMethodIds) {
           yearMonth
           income
           payment
@@ -195,13 +141,31 @@ export default {
       variables() {
         return {
           labels: [...this.selectedYearMonths].sort(),
-          userIds: this.selectedUsers.map(u => Number(u.id))
+          userIds: this.selectedUsers.map(u => Number(u.id)),
+          paymentClassificationIds: this.selectedPaymentClassifications.map(u => Number(u.id)),
+          paymentMethodIds: this.selectedPaymentMethods.map(u => Number(u.id)),
         }
       }
     },
     users: {
       query: gql`query {
         users {
+          id
+          name
+        }
+      }`
+    },
+    paymentClassifications: {
+      query: gql`query {
+        paymentClassifications {
+          id
+          name
+        }
+      }`
+    },
+    paymentMethods: {
+      query: gql`query {
+        paymentMethods {
           id
           name
         }

@@ -2,11 +2,26 @@ require 'rails_helper'
 
 RSpec.describe LineChart::Item, type: :model do
   let(:user) { FactoryBot.create(:user) }
-  let(:line_chart_item) { LineChart::Item.new(label: label, user_ids: [user.id]) }
+  let(:payment_classification) { FactoryBot.create(:payment_classification) }
+  let(:payment_method) { FactoryBot.create(:payment_method) }
+  let(:line_chart_item) do
+    LineChart::Item.new(
+      label: label,
+      user_ids: [user.id],
+      payment_classification_ids: [payment_classification.id],
+      payment_method_ids: [payment_method.id]
+    )
+  end
 
   before do
     (1..12).to_a do |month|
-      FactoryBot.create(:item, payed_on: Date.new(2021, month, 1), user: user)
+      FactoryBot.create(
+        :item,
+        payed_on: Date.new(2021, month, 1),
+        user: user,
+        payment_classification: payment_classification,
+        payment_method: payment_method
+      )
     end
   end
 
