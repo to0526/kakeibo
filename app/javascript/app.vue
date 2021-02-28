@@ -7,6 +7,8 @@
     <div>{{[...selectedYearMonths].sort()}}</div>
     <div>ユーザー</div>
     <div>{{selectedUsers.map(u => u.name)}}</div>
+    <div>収支分類</div>
+    <div>{{selectedPaymentClassifications.map(u => u.name)}}</div>
 
     <b-modal v-model="isSearchModalActive" has-modal-card>
       <div class="modal-card">
@@ -19,50 +21,11 @@
             </b-checkbox-button>
           </b-field>
 
-          <b-field label="ユーザー" grouped group-multiline>
-            <b-checkbox-button v-model="selectedUsers"
-              :native-value="user"
-              v-for="user in users">
-              <span>{{user.name}}</span>
-            </b-checkbox-button>
-          </b-field>
-
           <b-field label="収支分類" grouped group-multiline>
-            <b-checkbox-button v-model="paymentClassifications" native-value="食費">
-              <span>食費</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="外食">
-              <span>外食</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="水道光熱費">
-              <span>水道光熱費</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="通信費">
-              <span>通信費</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="日用品">
-              <span>日用品</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="一般保険料">
-              <span>一般保険料</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="娯楽費">
-              <span>娯楽費</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="コンビニで買ったおやつ">
-              <span>コンビニで買ったおやつ</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="本、雑誌">
-              <span>本、雑誌</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="服・美容">
-              <span>服・美容</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="ペット">
-              <span>ペット</span>
-            </b-checkbox-button>
-            <b-checkbox-button v-model="paymentClassifications" native-value="交通費">
-              <span>交通費</span>
+            <b-checkbox-button v-model="selectedPaymentClassifications"
+              :native-value="paymentClassification"
+              v-for="paymentClassification in paymentClassifications">
+              <span>{{paymentClassification.name}}</span>
             </b-checkbox-button>
           </b-field>
 
@@ -153,6 +116,7 @@ export default {
       users: [],
       selectedUsers: [],
       paymentClassifications: [],
+      selectedPaymentClassifications: [],
       paymentMethods: [],
       isSearchModalActive: false,
       users: [],
@@ -202,6 +166,14 @@ export default {
     users: {
       query: gql`query {
         users {
+          id
+          name
+        }
+      }`
+    },
+    paymentClassifications: {
+      query: gql`query {
+        paymentClassifications {
           id
           name
         }
