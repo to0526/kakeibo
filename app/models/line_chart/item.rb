@@ -18,8 +18,6 @@ module LineChart
       }
     end
 
-    private
-
     def border_color
       case date.month
       when  1 then "#E60012"
