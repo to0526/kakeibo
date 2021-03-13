@@ -44,13 +44,12 @@ module Types
 
     def data(labels:, user_ids:, payment_classification_ids:, payment_method_ids:)
       labels.map do |label|
-        args = {
+        ::LineChart::Table.new(
           label: label,
           user_ids: user_ids,
           payment_classification_ids: payment_classification_ids,
           payment_method_ids: payment_method_ids
-        }
-        ::LineChart::Table.new(args).to_json
+        ).to_json
       end
     end
 
