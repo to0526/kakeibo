@@ -18,13 +18,12 @@ module Types
       {
         labels: (1..31).to_a,
         datasets: labels.map do |label|
-          args = {
+          ::LineChart::Item.new(
             label: label,
             user_ids: user_ids,
             payment_classification_ids: payment_classification_ids,
             payment_method_ids: payment_method_ids
-          }
-          ::LineChart::Item.new(args).to_json
+          ).to_json
         end
       }
     end
