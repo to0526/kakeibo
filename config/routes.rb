@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  namespace :api do
-    namespace :items do
-      get 'line_charts/index'
+  defaults format: :json do
+    namespace :api do
+      namespace :items do
+        resources :line_charts, only: [:index]
+      end
     end
   end
   if Rails.env.development?
