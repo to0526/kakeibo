@@ -1,5 +1,5 @@
 From ruby:3.0.0-alpine3.13
-RUN apk add build-base postgresql-dev yarn
+RUN apk add build-base postgresql-dev yarn shared-mime-info
 RUN mkdir /app
 WORKDIR /app
 COPY ./Gemfile /app/Gemfile
