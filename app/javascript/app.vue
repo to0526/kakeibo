@@ -20,7 +20,8 @@
           <b-field label="支払日" grouped group-multiline>
             <b-checkbox-button v-model="selectedYearMonths"
               :native-value="yearMonth"
-              v-for="yearMonth in selectableYearMonths">
+              v-for="yearMonth in selectableYearMonths"
+              v-bind:key="yearMonth">
               <span>{{yearMonth}}</span>
             </b-checkbox-button>
           </b-field>
@@ -28,7 +29,8 @@
           <b-field label="ユーザー" grouped group-multiline>
             <b-checkbox-button v-model="selectedUsers"
               :native-value="user"
-              v-for="user in users">
+              v-for="user in users"
+              v-bind:key="user.name">
               <span>{{user.name}}</span>
             </b-checkbox-button>
           </b-field>
@@ -36,7 +38,8 @@
           <b-field label="収支分類" grouped group-multiline>
             <b-checkbox-button v-model="selectedPaymentClassifications"
               :native-value="paymentClassification"
-              v-for="paymentClassification in paymentClassifications">
+              v-for="paymentClassification in paymentClassifications"
+              v-bind:key="paymentClassification.name">
               <span>{{paymentClassification.name}}</span>
             </b-checkbox-button>
           </b-field>
@@ -44,7 +47,8 @@
           <b-field label="収支方法" grouped group-multiline>
             <b-checkbox-button v-model="selectedPaymentMethods"
               :native-value="paymentMethod"
-              v-for="paymentMethod in paymentMethods">
+              v-for="paymentMethod in paymentMethods"
+              v-bind:key="paymentMethod.name">
               <span>{{paymentMethod.name}}</span>
             </b-checkbox-button>
           </b-field>
