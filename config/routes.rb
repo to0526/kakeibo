@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  namespace :api do
-    get 'users/index'
+  details format: :json do
+    namespace :api do
+      resources :users, only: [:index]
+    end
   end
   if Rails.env.development?
     mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
