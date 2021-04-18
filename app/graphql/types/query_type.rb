@@ -53,12 +53,6 @@ module Types
       end
     end
 
-    field :users, [UserType], null: true
-
-    def users
-      User.all
-    end
-
     field :payment_classifications, [PaymentClassificationType], null: true
 
     def payment_classifications
