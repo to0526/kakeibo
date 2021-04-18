@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  details format: :json do
+  defaults format: :json do
     namespace :api do
       resources :users, only: [:index]
     end
