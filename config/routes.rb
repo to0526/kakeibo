@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  defaults format: :json do
+    namespace :api do
+      resources :users, only: [:index]
+    end
+  end
   if Rails.env.development?
     mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
   end

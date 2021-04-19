@@ -101,7 +101,6 @@ export default {
       paymentMethods: [],
       selectedPaymentMethods: [],
       isSearchModalActive: false,
-      users: [],
       checkAll: false,
     }
   },
@@ -150,14 +149,6 @@ export default {
         }
       }
     },
-    users: {
-      query: gql`query {
-        users {
-          id
-          name
-        }
-      }`
-    },
     paymentClassifications: {
       query: gql`query {
         paymentClassifications {
@@ -199,6 +190,12 @@ export default {
       }
     },
   },
+  mounted() {
+    fetch("/api/users")
+      .then(res =>    { return res.json() })
+      .then(json =>   { this.users = json })
+      .catch(error => { alert("ユーザを取得できませんでした") })
+  }
 }
 </script>
 
