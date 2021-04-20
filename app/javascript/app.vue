@@ -149,14 +149,6 @@ export default {
         }
       }
     },
-    paymentClassifications: {
-      query: gql`query {
-        paymentClassifications {
-          id
-          name
-        }
-      }`
-    },
     paymentMethods: {
       query: gql`query {
         paymentMethods {
@@ -195,6 +187,10 @@ export default {
       .then(res =>    { return res.json() })
       .then(json =>   { this.users = json })
       .catch(error => { alert("ユーザを取得できませんでした") })
+    fetch("/api/payment_classifications")
+      .then(res =>    { return res.json() })
+      .then(json =>   { this.paymentClassifications = json })
+      .catch(error => { alert("支払い分類を取得できませんでした") })
   }
 }
 </script>

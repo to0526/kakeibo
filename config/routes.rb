@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   defaults format: :json do
     namespace :api do
       resources :users, only: [:index]
+      resources :payment_classifications, only: [:index]
     end
   end
   if Rails.env.development?
