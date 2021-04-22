@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :api do
       resources :users, only: [:index]
       resources :payment_classifications, only: [:index]
+      resources :payment_methods, only: [:index]
     end
   end
   if Rails.env.development?
