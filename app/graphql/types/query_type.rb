@@ -52,11 +52,5 @@ module Types
         ).to_json
       end
     end
-
-    field :payment_methods, [PaymentMethodType], null: true
-
-    def payment_methods
-      PaymentMethod.all
-    end
   end
 end
