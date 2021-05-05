@@ -126,11 +126,6 @@ export default {
         }
       }
     },
-    selectableYearMonths: {
-      query: gql`query {
-        selectableYearMonths
-      }`
-    },
     data: {
       query: gql`query($labels: [String]!, $userIds: [Int]!, $paymentClassificationIds: [Int]!, $paymentMethodIds: [Int]!) {
         data(labels: $labels, userIds: $userIds, paymentClassificationIds: $paymentClassificationIds, paymentMethodIds: $paymentMethodIds) {
