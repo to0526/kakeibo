@@ -33,7 +33,7 @@
 
 
 import Vue from 'vue/dist/vue.esm'
-import App from '../app.vue'
+import ItemGraph from '../item-graph.vue'
 import ApolloClient from 'apollo-boost'
 import VueApollo from 'vue-apollo'
 import Buefy from 'buefy'
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
     el: '#hello',
     apolloProvider,
-    components: { App }
+    components: { ItemGraph }
   })
 })
 
