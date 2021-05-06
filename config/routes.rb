@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :users, only: [:index]
       resources :payment_classifications, only: [:index]
       resources :payment_methods, only: [:index]
+      resources :selectable_year_months, only: [:index]
     end
   end
   if Rails.env.development?

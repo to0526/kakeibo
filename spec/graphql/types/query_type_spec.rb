@@ -65,34 +65,6 @@ RSpec.describe Types::QueryType do
     end
   end
 
-  describe "#selectable_year_months" do
-    let(:query_string) do
-      <<~STR
-      query selectableYearMonths {
-        selectableYearMonths
-      }
-      STR
-    end
-    let(:variables) do
-      { }
-    end
-
-    it do
-      travel_to Time.zone.parse("2021-02-26") do
-        expect(subject["data"]["selectableYearMonths"]).to eq([
-          "2020/07",
-          "2020/08",
-          "2020/09",
-          "2020/10",
-          "2020/11",
-          "2020/12",
-          "2021/01",
-          "2021/02"
-        ])
-      end
-    end
-  end
-
   describe "#data" do
     let(:query_string) do
       <<~STR

@@ -126,11 +126,6 @@ export default {
         }
       }
     },
-    selectableYearMonths: {
-      query: gql`query {
-        selectableYearMonths
-      }`
-    },
     data: {
       query: gql`query($labels: [String]!, $userIds: [Int]!, $paymentClassificationIds: [Int]!, $paymentMethodIds: [Int]!) {
         data(labels: $labels, userIds: $userIds, paymentClassificationIds: $paymentClassificationIds, paymentMethodIds: $paymentMethodIds) {
@@ -187,6 +182,10 @@ export default {
       .then(res =>    { return res.json() })
       .then(json =>   { this.paymentMethods = json })
       .catch(error => { alert("支払い方法を取得できませんでした") })
+    fetch("/api/selectable_year_months")
+      .then(res =>    { return res.json() })
+      .then(json =>   { this.selectableYearMonths = json })
+      .catch(error => { alert("選択可能な年月を取得できませんでした") })
   }
 }
 </script>
