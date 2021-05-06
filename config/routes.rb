@@ -5,6 +5,9 @@ Rails.application.routes.draw do
       resources :payment_classifications, only: [:index]
       resources :payment_methods, only: [:index]
       resources :selectable_year_months, only: [:index]
+      namespace :items do
+        resources :balances, only: [:index]
+      end
     end
   end
   if Rails.env.development?
