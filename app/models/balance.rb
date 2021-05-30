@@ -8,17 +8,6 @@ class Balance
     @payment_method_ids = payment_method_ids
   end
 
-  def to_json
-    {
-      year_month: year_month,
-      payment: payment,
-      income: income,
-      balance: balance
-    }
-  end
-
-  private
-
   def payment
     Payment.where(where_args).sum(:amount)
   end
@@ -31,6 +20,8 @@ class Balance
     # paymentはマイナスで保存されるので足せばok
     payment + income
   end
+
+  private
 
   def where_args
     date = Date.parse(year_month).beginning_of_month
