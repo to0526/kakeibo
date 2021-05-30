@@ -1,4 +1,4 @@
-class Api::Items::BalancesController < ApplicationController
+class Api::BalancesController < ApplicationController
   def index
     @balances
   end
