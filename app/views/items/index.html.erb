@@ -37,45 +37,6 @@
 </div>
 
 <table>
-  <tr class="blue">
-    <th>収入</th>
-    <td align="right"><%= @incomes_total_amount.to_s(:delimited) %></td>
-  </tr>
-  <tr class="red">
-    <th>支出</th>
-    <td align="right"><%= @payments_total_amount.to_s(:delimited) %></td>
-  </tr>
-  <tr>
-    <th>合計金額</th>
-    <td align="right"><%= (@incomes_total_amount + @payments_total_amount).to_s(:delimited) %></td>
-  </tr>
-</table>
-
-<div id='hello'>
-  <item-graph></item-graph>
-</div>
-
-<div class="clearfix">
-  <table class="float-left">
-    <% @items_amount_with_classification[0].each do |item| %>
-      <tr>
-        <th class="multi"><%= item[:payment_classification] %></th>
-        <td class="multi" align="right"><%= item[:amount] %></td>
-      </tr>
-    <% end %>
-  </table>
-
-  <table class="float-left">
-    <% @items_amount_with_classification[1].compact.each do |item| %>
-      <tr>
-        <th class="multi"><%= item[:payment_classification] %></th>
-        <td class="multi" align="right"><%= item[:amount] %></td>
-      </tr>
-    <% end %>
-  </table>
-</div>
-
-<table>
   <thead>
     <tr>
       <th>支払日</th>
