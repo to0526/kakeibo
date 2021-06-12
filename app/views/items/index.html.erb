@@ -1,36 +1,21 @@
-<%= stylesheet_pack_tag 'hello_vue' %>
-<%= javascript_pack_tag 'hello_vue' %>
-
 <h2>収支一覧</h2>
+
+<%= params %>
 
 <div id="search_field">
   <h3>検索</h3>
-  <%= search_form_for @q do |f| %>
-    <div>
-      <div class="field inline">
-        <%= f.label :payed_on_gteq, "支払日" %>
-        <%= f.select :payed_on_gteq, search_payed_on_options, include_blank: true %>
-      </div>
-
-      <div class="field inline">
-        <%= f.label :user_id_eq, "ユーザー" %>
-        <%= f.select :user_id_eq, User.name_with_id, include_blank: true %>
-      </div>
-    </div>
+  <%= form_with url: items_path, method: :get, local: true do |f| %>
+    <% year_months.each_with_index do |year_month, i| %>
+      <label>
+        <%= f.check_box :"year_months[]", { checked: year_month.in?(params[:year_months] || []) }, year_month, nil %>
+        <%= year_month %>
+      </label>
+      <% if (i+1) % 6 == 0 %>
+        <br>
+      <% end %>
+    <% end %>
 
     <div>
-      <div class="field inline">
-        <%= f.label :payment_classification_id_eq, "収支分類" %>
-        <%= f.select :payment_classification_id_eq, PaymentClassification.name_with_id, include_blank: true %>
-      </div>
-
-      <div class="field inline">
-        <%= f.label :payment_method_id_eq, "収支方法" %>
-        <%= f.select :payment_method_id_eq, PaymentMethod.name_with_id, include_blank: true %>
-      </div>
-    </div>
-
-    <div class="actions">
       <%= f.submit "検索" %>
     </div>
   <% end %>
