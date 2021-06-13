@@ -8,5 +8,8 @@ class ItemsController < ApplicationController
     else
       @items = Item.none
     end
+    @users = User.all
+    @payment_methods = PaymentMethod.all
+    @payment_classifications = PaymentClassification.all
   end
 end
