@@ -23,4 +23,18 @@ class Item < ApplicationRecord
       .order(payed_on: :asc)
       .sum(:amount)
   end
+
+  def self.line_chart_by_month(year_month)
+    items = amount_group_by_day(year_month)
+    from = Date.parse(year_month).beginning_of_month.day
+    to   = Date.parse(year_month).end_of_month.day
+    total_amount = 0
+    data = {}
+    (from..to).to_a.each do |day|
+      amount_by_day = (items[Date.parse("#{year_month}/#{day}")] || 0)
+      total_amount += amount_by_day
+      data[day] = total_amount
+    end
+    { name: year_month, data: data }
+  end
 end
