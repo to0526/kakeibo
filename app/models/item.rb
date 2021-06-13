@@ -10,6 +10,12 @@ class Item < ApplicationRecord
     where(where_args)
   end
 
+  scope :where_year_month, -> (year_month) do
+    from = Date.parse(year_month).beginning_of_month
+    to   = Date.parse(year_month).end_of_month
+    where("(payed_on BETWEEN '#{from}' AND '#{to}')")
+  end
+
   belongs_to :user
   belongs_to :payment_classification
   belongs_to :payment_method
