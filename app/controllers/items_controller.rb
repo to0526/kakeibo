@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
         total_amount = 0
         h = {}
         h[:name] = year_month
-        items = Item.where_year_month(year_month).group("payed_on").order(payed_on: :asc).sum(:amount)
+        items = Item.amount_group_by_day(year_month)
         from = Date.parse(year_month).beginning_of_month.day
         to   = Date.parse(year_month).end_of_month.day
         h[:data] = {}
