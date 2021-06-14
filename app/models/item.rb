@@ -7,12 +7,20 @@ class Item < ApplicationRecord
   validates :payed_on, presence: true
 
   scope :where_year_months, -> (year_months) do
+    return none unless year_months
     where_args = year_months.map do |year_month|
       from = Date.parse(year_month).beginning_of_month
       to   = Date.parse(year_month).end_of_month
       "(payed_on BETWEEN '#{from}' AND '#{to}')"
     end.join(" OR ")
     where(where_args)
+  end
+
+  def self.search(search_params)
+    where_year_months(search_params[:year_months])
+      .where(user_id: search_params[:user_ids])
+      .where(payment_method_id: search_params[:payment_method_ids])
+      .where(payment_classification_id: search_params[:payment_classification_ids])
   end
 
   def self.amount_group_by_day(year_month)

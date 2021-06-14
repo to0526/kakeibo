@@ -9,7 +9,9 @@
     <h3>年月</h3>
     <% year_months.each_with_index do |year_month, i| %>
       <label>
-        <%= f.check_box :"year_months[]", { checked: year_month.in?(params[:year_months] || []) }, year_month, nil %>
+        <%= f.check_box :"search[year_months][]",
+          { checked: year_month.in?(params[:search][:year_months] || []) },
+          year_month, nil %>
         <%= year_month %>
       </label>
       <% if (i+1) % 6 == 0 %>
@@ -21,8 +23,8 @@
     <% @users.each_with_index do |user| %>
       <label>
         <%=
-          f.check_box :"user_ids[]",
-            { checked: user.id.to_s.in?(params[:user_ids] || []) },
+          f.check_box :"search[user_ids][]",
+            { checked: user.id.to_s.in?(params[:search][:user_ids] || []) },
             user.id, nil %>
         <%= user.name %>
       </label>
@@ -32,8 +34,8 @@
     <% @payment_methods.each_with_index do |payment_method| %>
       <label>
         <%=
-          f.check_box :"payment_method_ids[]",
-            { checked: payment_method.id.to_s.in?(params[:payment_method_ids] || []) },
+          f.check_box :"search[payment_method_ids][]",
+            { checked: payment_method.id.to_s.in?(params[:search][:payment_method_ids] || []) },
             payment_method.id, nil %>
         <%= payment_method.name %>
       </label>
@@ -43,8 +45,8 @@
     <% @payment_classifications.each_with_index do |payment_classification| %>
       <label>
         <%=
-          f.check_box :"payment_classification_ids[]",
-            { checked: payment_classification.id.to_s.in?(params[:payment_classification_ids] || []) },
+          f.check_box :"search[payment_classification_ids][]",
+            { checked: payment_classification.id.to_s.in?(params[:search][:payment_classification_ids] || []) },
             payment_classification.id, nil %>
         <%= payment_classification.name %>
       </label>
