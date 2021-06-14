@@ -14,10 +14,16 @@ class ItemsController < ApplicationController
     end
 
     if Item.search(params[:search]).present?
-      @items = Item.search(params[:search]).order(payed_on: :desc)
+      @items = Item.search(params[:search])
       @items_line_chart = params[:search][:year_months].each_with_object([]) do |year_month, arr|
         arr << @items.line_chart_by_month(year_month)
       end
+      # @balances_by_month = @items.balances_by_month
+      @balances_by_classification = @items
+        .group(:payment_classification_id)
+        .order(payment_classification_id: :asc)
+        .sum(:amount)
+      @items = @items.order(payed_on: :desc)
     else
       @items = Item.none
       @items_line_chart = []

@@ -65,6 +65,23 @@
 <h2>収支月別</h2>
 
 <h2>収支分類別</h2>
+<table>
+  <thead>
+    <tr>
+      <th>支払分類</th>
+      <th>金額</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @balances_by_classification.each do |classfication_id, amount| %>
+      <tr>
+        <td><%= PaymentClassification.find(classfication_id).name %></td>
+        <td><%= amount.to_s(:delimited) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 
 <h2>収支詳細</h2>
 <table>
