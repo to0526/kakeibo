@@ -16,24 +16,23 @@ class Item < ApplicationRecord
     where(where_args)
   end
 
-  def self.search(search_params)
+  scope :search, -> (search_params) do
     where_year_months(search_params[:year_months])
       .where(user_id: search_params[:user_ids])
       .where(payment_method_id: search_params[:payment_method_ids])
       .where(payment_classification_id: search_params[:payment_classification_ids])
   end
 
-  def self.amount_group_by_day(year_month)
+  scope :amount_group_by_day, -> (year_month) do
     from = Date.parse(year_month).beginning_of_month
     to   = Date.parse(year_month).end_of_month
     where("(payed_on BETWEEN '#{from}' AND '#{to}')")
       .group("payed_on")
       .order(payed_on: :asc)
-      .sum(:amount)
   end
 
   def self.line_chart_by_month(year_month)
-    items = amount_group_by_day(year_month)
+    items = amount_group_by_day(year_month).sum(:amount)
     from = Date.parse(year_month).beginning_of_month.day
     to   = Date.parse(year_month).end_of_month.day
     total_amount = 0
