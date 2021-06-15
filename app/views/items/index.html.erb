@@ -1,7 +1,5 @@
 <h1>収支一覧</h1>
 
-<%= params %>
-
 <h2>検索</h2>
 <div id="search_field">
   <%= form_with url: items_path, method: :get, local: true do |f| %>
@@ -63,6 +61,26 @@
 <%= line_chart @items_line_chart %>
 
 <h2>収支月別</h2>
+<table>
+  <thead>
+    <tr>
+      <th>年月</th>
+      <th>収入</th>
+      <th>支払</th>
+      <th>収支</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @balances_by_month.each do |balance_by_month| %>
+      <tr>
+        <td><%= balance_by_month[:year_month] %></td>
+        <td><%= balance_by_month[:income].to_s(:delimited) %></td>
+        <td><%= balance_by_month[:payment].to_s(:delimited) %></td>
+        <td><%= balance_by_month[:balance].to_s(:delimited) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <h2>収支分類別</h2>
 <table>

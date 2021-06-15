@@ -18,7 +18,9 @@ class ItemsController < ApplicationController
       @items_line_chart = params[:search][:year_months].each_with_object([]) do |year_month, arr|
         arr << @items.line_chart_by_month(year_month)
       end
-      # @balances_by_month = @items.balances_by_month
+      @balances_by_month = params[:search][:year_months].each_with_object([]) do |year_month, arr|
+        arr << @items.balance_by_month(year_month)
+      end
       @balances_by_classification = @items
         .group(:payment_classification_id)
         .order(payment_classification_id: :asc)
@@ -27,6 +29,8 @@ class ItemsController < ApplicationController
     else
       @items = Item.none
       @items_line_chart = []
+      @balances_by_month = []
+      @balances_by_classification = []
     end
   end
 
