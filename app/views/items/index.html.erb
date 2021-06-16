@@ -57,7 +57,6 @@
 </div>
 
 <h2>グラフ</h2>
-
 <%= line_chart @items_line_chart %>
 
 <h2>収支月別</h2>
@@ -91,6 +90,24 @@
         <% end %>
       </tr>
     <% end %>
+    <tr>
+      <td>合計</td>
+      <% if @balances_by_month.map{|b|b[:income]}.sum < 0 %>
+        <td align="right" class="red"><%= @balances_by_month.map{|b|b[:income]}.sum.to_s(:delimited) %></td>
+      <% else %>
+        <td align="right" class="blue"><%= @balances_by_month.map{|b|b[:income]}.sum.to_s(:delimited) %></td>
+      <% end %>
+      <% if @balances_by_month.map{|b|b[:payment]}.sum < 0 %>
+        <td align="right" class="red"><%= @balances_by_month.map{|b|b[:payment]}.sum.to_s(:delimited) %></td>
+      <% else %>
+        <td align="right" class="blue"><%= @balances_by_month.map{|b|b[:payment]}.sum.to_s(:delimited) %></td>
+      <% end %>
+      <% if @balances_by_month.map{|b|b[:balance]}.sum < 0 %>
+        <td align="right" class="red"><%= @balances_by_month.map{|b|b[:balance]}.sum.to_s(:delimited) %></td>
+      <% else %>
+        <td align="right" class="blue"><%= @balances_by_month.map{|b|b[:balance]}.sum.to_s(:delimited) %></td>
+      <% end %>
+    </tr>
   </tbody>
 </table>
 
