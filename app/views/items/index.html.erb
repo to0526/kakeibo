@@ -71,40 +71,16 @@
     <% @balances_by_month.each do |balance_by_month| %>
       <tr>
         <td><%= balance_by_month[:year_month] %></td>
-        <% if balance_by_month[:income] < 0 %>
-          <td align="right" class="red"><%= balance_by_month[:income].to_s(:delimited) %></td>
-        <% else %>
-          <td align="right" class="blue"><%= balance_by_month[:income].to_s(:delimited) %></td>
-        <% end %>
-        <% if balance_by_month[:payment] < 0 %>
-          <td align="right" class="red"><%= balance_by_month[:payment].to_s(:delimited) %></td>
-        <% else %>
-          <td align="right" class="blue"><%= balance_by_month[:payment].to_s(:delimited) %></td>
-        <% end %>
-        <% if balance_by_month[:balance] < 0 %>
-          <td align="right" class="red"><%= balance_by_month[:balance].to_s(:delimited) %></td>
-        <% else %>
-          <td align="right" class="blue"><%= balance_by_month[:balance].to_s(:delimited) %></td>
-        <% end %>
+        <%= displayed_amount(balance_by_month[:income]) %>
+        <%= displayed_amount(balance_by_month[:payment]) %>
+        <%= displayed_amount(balance_by_month[:balance]) %>
       </tr>
     <% end %>
     <tr>
       <td>合計</td>
-      <% if @balances_by_month.map{|b|b[:income]}.sum < 0 %>
-        <td align="right" class="red"><%= @balances_by_month.map{|b|b[:income]}.sum.to_s(:delimited) %></td>
-      <% else %>
-        <td align="right" class="blue"><%= @balances_by_month.map{|b|b[:income]}.sum.to_s(:delimited) %></td>
-      <% end %>
-      <% if @balances_by_month.map{|b|b[:payment]}.sum < 0 %>
-        <td align="right" class="red"><%= @balances_by_month.map{|b|b[:payment]}.sum.to_s(:delimited) %></td>
-      <% else %>
-        <td align="right" class="blue"><%= @balances_by_month.map{|b|b[:payment]}.sum.to_s(:delimited) %></td>
-      <% end %>
-      <% if @balances_by_month.map{|b|b[:balance]}.sum < 0 %>
-        <td align="right" class="red"><%= @balances_by_month.map{|b|b[:balance]}.sum.to_s(:delimited) %></td>
-      <% else %>
-        <td align="right" class="blue"><%= @balances_by_month.map{|b|b[:balance]}.sum.to_s(:delimited) %></td>
-      <% end %>
+      <%= displayed_amount(@balances_by_month.map{|b|b[:income]}.sum) %>
+      <%= displayed_amount(@balances_by_month.map{|b|b[:payment]}.sum) %>
+      <%= displayed_amount(@balances_by_month.map{|b|b[:balance]}.sum) %>
     </tr>
   </tbody>
 </table>
@@ -121,11 +97,7 @@
     <% @balances_by_classification.sort_by{|a|a[:sort]}.each do |h| %>
       <tr>
         <td><%= h[:name] %></td>
-        <% if h[:amount] < 0 %>
-          <td align="right" class="red"><%= h[:amount].to_s(:delimited) %></td>
-        <% else %>
-          <td align="right" class="blue"><%= h[:amount].to_s(:delimited) %></td>
-        <% end %>
+        <%= displayed_amount(h[:amount]) %>
       </tr>
     <% end %>
   </tbody>
@@ -150,11 +122,7 @@
     <% @items.each do |item| %>
       <tr>
         <td><%= item.payed_on %></td>
-        <% if item.type == "Payment" %>
-          <td align="right" class="red"><%= item.amount.to_s(:delimited) %></td>
-        <% elsif item.type == "Income" %>
-          <td align="right" class="blue"><%= item.amount.to_s(:delimited) %></td>
-        <% end %>
+        <%= displayed_amount(item.amount) %>
         <td><%= item.user.name %></td>
         <td><%= item.payment_classification.name %></td>
         <td><%= item.payment_method.name %></td>
