@@ -74,9 +74,21 @@
     <% @balances_by_month.each do |balance_by_month| %>
       <tr>
         <td><%= balance_by_month[:year_month] %></td>
-        <td><%= balance_by_month[:income].to_s(:delimited) %></td>
-        <td><%= balance_by_month[:payment].to_s(:delimited) %></td>
-        <td><%= balance_by_month[:balance].to_s(:delimited) %></td>
+        <% if balance_by_month[:income] < 0 %>
+          <td align="right" class="red"><%= balance_by_month[:income].to_s(:delimited) %></td>
+        <% else %>
+          <td align="right" class="blue"><%= balance_by_month[:income].to_s(:delimited) %></td>
+        <% end %>
+        <% if balance_by_month[:payment] < 0 %>
+          <td align="right" class="red"><%= balance_by_month[:payment].to_s(:delimited) %></td>
+        <% else %>
+          <td align="right" class="blue"><%= balance_by_month[:payment].to_s(:delimited) %></td>
+        <% end %>
+        <% if balance_by_month[:balance] < 0 %>
+          <td align="right" class="red"><%= balance_by_month[:balance].to_s(:delimited) %></td>
+        <% else %>
+          <td align="right" class="blue"><%= balance_by_month[:balance].to_s(:delimited) %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -94,7 +106,11 @@
     <% @balances_by_classification.each do |classfication_id, amount| %>
       <tr>
         <td><%= PaymentClassification.find(classfication_id).name %></td>
-        <td><%= amount.to_s(:delimited) %></td>
+        <% if amount < 0 %>
+          <td align="right" class="red"><%= amount.to_s(:delimited) %></td>
+        <% else %>
+          <td align="right" class="blue"><%= amount.to_s(:delimited) %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
