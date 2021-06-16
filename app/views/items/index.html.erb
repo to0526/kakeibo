@@ -1,6 +1,5 @@
 <h1>収支一覧</h1>
 
-<h2>検索</h2>
 <div id="search_field">
   <%= form_with url: items_path, method: :get, local: true do |f| %>
 
@@ -56,10 +55,9 @@
   <% end %>
 </div>
 
-<h2>グラフ</h2>
 <%= line_chart @items_line_chart %>
 
-<h2>収支月別</h2>
+<h2>月別収支</h2>
 <table>
   <thead>
     <tr>
@@ -111,7 +109,7 @@
   </tbody>
 </table>
 
-<h2>収支分類別</h2>
+<h2>分類別収支</h2>
 <table>
   <thead>
     <tr>
