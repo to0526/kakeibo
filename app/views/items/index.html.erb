@@ -103,13 +103,13 @@
     </tr>
   </thead>
   <tbody>
-    <% @balances_by_classification.each do |classfication_id, amount| %>
+    <% @balances_by_classification.sort_by{|a|a[:sort]}.each do |h| %>
       <tr>
-        <td><%= PaymentClassification.find(classfication_id).name %></td>
-        <% if amount < 0 %>
-          <td align="right" class="red"><%= amount.to_s(:delimited) %></td>
+        <td><%= h[:name] %></td>
+        <% if h[:amount] < 0 %>
+          <td align="right" class="red"><%= h[:amount].to_s(:delimited) %></td>
         <% else %>
-          <td align="right" class="blue"><%= amount.to_s(:delimited) %></td>
+          <td align="right" class="blue"><%= h[:amount].to_s(:delimited) %></td>
         <% end %>
       </tr>
     <% end %>
