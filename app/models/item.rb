@@ -47,8 +47,8 @@ class Item < ApplicationRecord
 
   def self.balance_by_month(year_month)
     balance = amount_group_by_day(year_month).sum(:amount).values.sum || 0
-    income  = amount_group_by_day(year_month).where(type: "Income").sum(:amount).sum || 0
-    payment = amount_group_by_day(year_month).where(type: "Payment").sum(:amount).sum || 0
+    income  = amount_group_by_day(year_month).where(type: "Income").sum(:amount).values.sum || 0
+    payment = amount_group_by_day(year_month).where(type: "Payment").sum(:amount).values.sum || 0
     { year_month: year_month, payment: payment, income: income, balance: balance }
   end
 end
