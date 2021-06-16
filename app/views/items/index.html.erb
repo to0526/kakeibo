@@ -1,6 +1,5 @@
 <h1>収支一覧</h1>
 
-<h2>検索</h2>
 <div id="search_field">
   <%= form_with url: items_path, method: :get, local: true do |f| %>
 
@@ -56,11 +55,9 @@
   <% end %>
 </div>
 
-<h2>グラフ</h2>
-
 <%= line_chart @items_line_chart %>
 
-<h2>収支月別</h2>
+<h2>月別収支</h2>
 <table>
   <thead>
     <tr>
@@ -74,27 +71,21 @@
     <% @balances_by_month.each do |balance_by_month| %>
       <tr>
         <td><%= balance_by_month[:year_month] %></td>
-        <% if balance_by_month[:income] < 0 %>
-          <td align="right" class="red"><%= balance_by_month[:income].to_s(:delimited) %></td>
-        <% else %>
-          <td align="right" class="blue"><%= balance_by_month[:income].to_s(:delimited) %></td>
-        <% end %>
-        <% if balance_by_month[:payment] < 0 %>
-          <td align="right" class="red"><%= balance_by_month[:payment].to_s(:delimited) %></td>
-        <% else %>
-          <td align="right" class="blue"><%= balance_by_month[:payment].to_s(:delimited) %></td>
-        <% end %>
-        <% if balance_by_month[:balance] < 0 %>
-          <td align="right" class="red"><%= balance_by_month[:balance].to_s(:delimited) %></td>
-        <% else %>
-          <td align="right" class="blue"><%= balance_by_month[:balance].to_s(:delimited) %></td>
-        <% end %>
+        <%= displayed_amount(balance_by_month[:income]) %>
+        <%= displayed_amount(balance_by_month[:payment]) %>
+        <%= displayed_amount(balance_by_month[:balance]) %>
       </tr>
     <% end %>
+    <tr>
+      <td>合計</td>
+      <%= displayed_amount(@balances_by_month.map{|b|b[:income]}.sum) %>
+      <%= displayed_amount(@balances_by_month.map{|b|b[:payment]}.sum) %>
+      <%= displayed_amount(@balances_by_month.map{|b|b[:balance]}.sum) %>
+    </tr>
   </tbody>
 </table>
 
-<h2>収支分類別</h2>
+<h2>分類別収支</h2>
 <table>
   <thead>
     <tr>
@@ -103,14 +94,10 @@
     </tr>
   </thead>
   <tbody>
-    <% @balances_by_classification.each do |classfication_id, amount| %>
+    <% @balances_by_classification.sort_by{|a|a[:sort]}.each do |h| %>
       <tr>
-        <td><%= PaymentClassification.find(classfication_id).name %></td>
-        <% if amount < 0 %>
-          <td align="right" class="red"><%= amount.to_s(:delimited) %></td>
-        <% else %>
-          <td align="right" class="blue"><%= amount.to_s(:delimited) %></td>
-        <% end %>
+        <td><%= h[:name] %></td>
+        <%= displayed_amount(h[:amount]) %>
       </tr>
     <% end %>
   </tbody>
@@ -135,11 +122,7 @@
     <% @items.each do |item| %>
       <tr>
         <td><%= item.payed_on %></td>
-        <% if item.type == "Payment" %>
-          <td align="right" class="red"><%= item.amount.to_s(:delimited) %></td>
-        <% elsif item.type == "Income" %>
-          <td align="right" class="blue"><%= item.amount.to_s(:delimited) %></td>
-        <% end %>
+        <%= displayed_amount(item.amount) %>
         <td><%= item.user.name %></td>
         <td><%= item.payment_classification.name %></td>
         <td><%= item.payment_method.name %></td>

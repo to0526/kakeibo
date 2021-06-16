@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   def index
     @users = User.all
     @payment_methods = PaymentMethod.all
-    @payment_classifications = PaymentClassification.all
+    @payment_classifications = PaymentClassification.order(:sort)
 
     unless params[:search]
       params[:search] = {
@@ -23,8 +23,14 @@ class ItemsController < ApplicationController
       end
       @balances_by_classification = @items
         .group(:payment_classification_id)
-        .order(payment_classification_id: :asc)
-        .sum(:amount)
+        .sum(:amount).map do |classification_id, amount|
+          payment_classification = PaymentClassification.find(classification_id)
+          {
+            name: payment_classification.name,
+            sort: payment_classification.sort,
+            amount: amount
+          }
+        end
       @items = @items.order(payed_on: :desc)
     else
       @items = Item.none
