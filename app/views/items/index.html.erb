@@ -4,6 +4,11 @@
   <%= form_with url: items_path, method: :get, local: true do |f| %>
 
     <h3>年月</h3>
+    <label>
+      <%= check_box_tag "check_all_year_months" %>
+      全て選択
+    </label>
+    <br>
     <% year_months.each_with_index do |year_month, i| %>
       <label>
         <%= f.check_box :"search[year_months][]",
@@ -17,6 +22,11 @@
     <% end %>
 
     <h3>ユーザー</h3>
+    <label>
+      <%= check_box_tag "check_all_users", "1", true %>
+      全て選択
+    </label>
+    <br>
     <% @users.each_with_index do |user| %>
       <label>
         <%=
@@ -28,6 +38,11 @@
     <% end %>
 
     <h3>収支分類</h3>
+    <label>
+      <%= check_box_tag "check_all_payment_methods", "1", true %>
+      全て選択
+    </label>
+    <br>
     <% @payment_methods.each_with_index do |payment_method| %>
       <label>
         <%=
@@ -39,6 +54,11 @@
     <% end %>
 
     <h3>収支方法</h3>
+    <label>
+      <%= check_box_tag "check_all_payment_classifications", "1", true %>
+      全て選択
+    </label>
+    <br>
     <% @payment_classifications.each_with_index do |payment_classification| %>
       <label>
         <%=
