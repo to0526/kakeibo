@@ -1,0 +1,16 @@
+main {
+  width: 700px;
+  margin: 0 auto;
+  h2 {
+    border-left: 10px solid teal;
+    border-bottom: 1px solid teal;
+    padding: 5px 10px;
+  }
+  #search_field {
+    border: 1px solid olive;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+}
+

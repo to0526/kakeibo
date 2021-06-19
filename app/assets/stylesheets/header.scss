@@ -1,0 +1,34 @@
+header {
+  width: 730px;
+  margin: 0 auto;
+
+  h1 {
+    text-align: center;
+  }
+
+  nav {
+    ul {
+      padding-left: 0;
+      list-style-type: none;
+
+      li {
+        float: left;
+        margin-right: 2px;
+        width: 100px;
+        text-align: center;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      a {
+        text-decoration: none;
+        background-color: teal;
+        color: white;
+        display: block;
+        padding: 10px;
+      }
+    }
+  }
+}
