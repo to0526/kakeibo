@@ -1,0 +1,53 @@
+form {
+  .inline {
+    display: inline;
+  }
+  .field {
+    label {
+      margin-bottom: 20px;
+      width: 70px;
+      display: inline-block;
+      margin-left: 20px;
+    }
+    input[type="text"],
+    input[type="password"],
+    input[type="date"],
+    input[type="number"],
+    select,
+    textarea {
+      padding: 5px;
+      width: 200px;
+    }
+    .field_with_errors {
+      display: inline;
+      label {
+        color: red;
+      }
+      input[type="text"],
+      input[type="password"],
+      input[type="date"],
+      input[type="number"],
+      select,
+      textarea {
+        border: 1px solid red;
+      }
+    }
+  }
+  .actions {
+    input[type="submit"] {
+      margin-left: 95px;
+      background-color: navy;
+      padding: 10px 20px;
+      border: 1px solid navy;
+      border-radius: 10px;
+      cursor: pointer;
+      color: white;
+    }
+  }
+  #error_explanation {
+    background-color: rgba(255, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+}
