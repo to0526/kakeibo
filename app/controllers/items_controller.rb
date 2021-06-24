@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
 
     unless params[:search]
       params[:search] = {
-        "year_months": last_three_year_months,
+        "year_months": [Date.today.strftime("%Y/%m")],
         "user_ids": @users.ids.map(&:to_s),
         "payment_method_ids": @payment_methods.ids.map(&:to_s),
         "payment_classification_ids": @payment_classifications.ids.map(&:to_s),
@@ -37,15 +37,6 @@ class ItemsController < ApplicationController
       @items_line_chart = []
       @balances_by_month = []
       @balances_by_classification = []
-    end
-  end
-
-  private
-
-  def last_three_year_months
-    today = Date.today
-    [today, today-1.month, today-2.months].map do |date|
-      date.strftime("%Y/%m")
     end
   end
 end
