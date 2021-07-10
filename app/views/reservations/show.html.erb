@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Day:</strong>
+  <%= @reservation.day %>
+</p>
+
+<p>
+  <strong>Kind:</strong>
+  <%= @reservation.kind %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @reservation.amount %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @reservation.user_id %>
+</p>
+
+<p>
+  <strong>Payment classification:</strong>
+  <%= @reservation.payment_classification_id %>
+</p>
+
+<p>
+  <strong>Payment method:</strong>
+  <%= @reservation.payment_method_id %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @reservation.note %>
+</p>
+
+<%= link_to 'Edit', edit_reservation_path(@reservation) %> |
+<%= link_to 'Back', reservations_path %>
